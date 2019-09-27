@@ -1,0 +1,4 @@
+book
+**/target/
+.DS_Store
+/target
