@@ -4,11 +4,11 @@ To use SDL2 in rust, we need to add the sdl2 crate in the dependency as a depend
 
 {insert explanation about cargo}
 
-Open the file 'cargo.toml' in the editor of your choice.
+Open the file `cargo.toml` in the editor of your choice.
 
 It should look like this:
 
-'cargo.toml'
+`cargo.toml`
 
 ```rust
 [package]
@@ -24,9 +24,9 @@ edition = "2018"
 
 ```
 Add the following line in the [dependencies] section:
-'sdl2 = "0.30.0"'
+`sdl2 = "0.30.0"`
 
-open 'src/main.rs'
+open `src/main.rs`
 
 ```rust
 // Dependencies go here
@@ -62,12 +62,14 @@ fn main() {
 
 ```
 
-Right in the beginning of the File, in the section '// Dependencies go here', add the following lines:
+Right in the beginning of the File, in the section `// Dependencies go here`, add the following lines:
 
-'use sdl2::video::Window;'
-'use sdl2::pixels::Color;'
-'use sdl2::render::Canvas;'
-'use sdl2::EventPump;'
+```rust
+use sdl2::video::Window;
+use sdl2::pixels::Color;
+use sdl2::render::Canvas;
+use sdl2::EventPump;
+```
 
-In your terminal, go into the folder '/rusty-snake', and run the command 'cargo run'.
-What do you see? To get rid of this warning, we need to call 'fn init' in 'main()'. 
+In your terminal, go into the folder `/rusty-snake`, and run the command `cargo run`.
+What do you see? To get rid of this warning, we need to call `fn init` in `main()`.
