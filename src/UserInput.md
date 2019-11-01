@@ -15,7 +15,7 @@ use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 ```
 
-2. Enter the following lines into the `for` loop. `match` compares the value of the `event`-variable to the variants of the enum `Event`. If the value of the `event`-variable is a pressed `esc`-key, the `'game`-loop breaks. If value is something else, the loop continues. The last part of a `match` alwayzs needs to be `_ =>`, the case that covers all cases that are not explicitly defined.
+2. Enter the following lines into the `for` loop. `match` compares the value of the `event`-variable to the variants of the enum `Event`. If the value of the `event`-variable is a pressed `esc`-key, the `'game`-loop breaks. If value is something else, the loop continues. The last part of a `match` always needs to be `_ =>`, the case that covers all cases that are not explicitly defined.
 
 ```rust
 

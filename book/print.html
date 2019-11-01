@@ -1,0 +1,422 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rusty Snake</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="Overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="Installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="Cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="Debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="GridInit.html"><strong aria-hidden="true">8.</strong> Initializing Grid</a></li><li><a href="Modularization.html"><strong aria-hidden="true">9.</strong> Modularization</a></li><li><a href="GridDisplay.html"><strong aria-hidden="true">10.</strong> Displaying Grid</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rusty Snake</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#chapter-1" id="chapter-1"><h1>Chapter 1</h1></a>
+<p>installation</p>
+<p>basic explanation</p>
+<p>sdl</p>
+<a class="header" href="#installation" id="installation"><h1>Installation</h1></a>
+<a class="header" href="#cargo-and-dependencies" id="cargo-and-dependencies"><h1>Cargo and Dependencies</h1></a>
+<p>To use SDL2 in rust, we need to add the sdl2 crate in the dependency as a dependency.</p>
+<p>{insert explanation about cargo}</p>
+<p>Open the file <code>cargo.toml</code> in the editor of your choice.</p>
+<p>It should look like this:</p>
+<p><code>cargo.toml</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+[package]
+name = &quot;rusty-snake&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;Your Name&quot;]
+edition = &quot;2018&quot;
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+
+#}</code></pre></pre>
+<p>Add the following line in the [dependencies] section:
+<code>sdl2 = &quot;0.30.0&quot;</code></p>
+<p>open <code>src/main.rs</code></p>
+<pre><pre class="playpen"><code class="language-rust">// Dependencies go here
+
+
+
+
+// this function initializes the canvas
+fn init&lt;'a&gt;(x: i32, y: i32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
+    let sdl_context = sdl2::init().unwrap();
+    let video_subsystem = sdl_context.video().unwrap();
+
+    let window = video_subsystem
+        .window(&quot;Squares&quot;, x as u32 + 1, y as u32 + 1)
+        .position_centered()
+        .build()
+        .unwrap();
+
+    let mut canvas = window.into_canvas().present_vsync().build().unwrap();
+
+    canvas.set_draw_color(Color::RGB(0, 0, 0));
+    canvas.clear();
+    canvas.present();
+
+    let event_pump = sdl_context.event_pump().unwrap();
+    (canvas, event_pump)
+}
+
+// this is main
+fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+
+</code></pre></pre>
+<p>Right in the beginning of the File, in the section <code>// Dependencies go here</code>, add the following lines:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use sdl2::video::Window;
+use sdl2::pixels::Color;
+use sdl2::render::Canvas;
+use sdl2::EventPump;
+#}</code></pre></pre>
+<p>In your terminal, go into the folder <code>/rusty-snake</code>, and run the command <code>cargo run</code>.
+What do you see? To get rid of this warning, we need to call <code>fn init</code> in <code>main()</code>.</p>
+<a class="header" href="#initializing-the-canvas" id="initializing-the-canvas"><h1>Initializing the Canvas</h1></a>
+<a class="header" href="#functions-and-variables" id="functions-and-variables"><h2>Functions and variables</h2></a>
+<p>Let's take a closer look at <code>fn init</code>.</p>
+<p><code>main.rs</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+// this function initializes the canvas
+fn init&lt;'a&gt;(width: i32, height: i32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
+    let sdl_context = sdl2::init().unwrap();
+    let video_subsystem = sdl_context.video().unwrap();
+
+    let window = video_subsystem
+        .window(&quot;Rusty Snake&quot;, width as u32 + 1, height as u32 + 1)
+        .position_centered()
+        .build()
+        .unwrap();
+
+    let mut canvas = window.into_canvas().present_vsync().build().unwrap();
+
+    canvas.set_draw_color(Color::RGB(0, 0, 0));
+    canvas.clear();
+    canvas.present();
+
+    let event_pump = sdl_context.event_pump().unwrap();
+    (canvas, event_pump)
+}
+
+#}</code></pre></pre>
+<p><code>fn</code> declares the function, <code>init</code> is its name. <code>&lt;'a&gt;</code> indicates its lifetime. Lifetimes are unique to rust, declaring them is not needed for most functions, so we will just acknowledge its existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be indicated. In this example, the type of both parameters is <code>i32</code>, a 32bit integer. The return types also need to be specifically named. <code>fn init</code> returns two values in a bracket, separated by a comma. The types of these values are defined in the sdl2-crate. We'll ignore the body of the function for now.</p>
+<ol>
+<li>In <code>main()</code>, delete the <code>println!</code> statement.</li>
+<li>Declare the variables <code>canvas_width</code> and <code>canvas_height</code>. [Values?]</li>
+<li>Call the function by adding the following line:</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let (canvas, events) = init(canvas_width, canvas_height);
+#}</code></pre></pre>
+<ol start="4">
+<li>In the terminal enter <code>cargo run</code>. What happens?</li>
+</ol>
+<a class="header" href="#the-game-loop" id="the-game-loop"><h1>The Game Loop</h1></a>
+<a class="header" href="#loops" id="loops"><h2>Loops</h2></a>
+<p>When running the program, we shouldn't see anything. If you don't see any error messages, the progamm compiles.
+We have initialized the canvas, but in order for the program to run continuously, we need a game loop.</p>
+<ol>
+<li>
+<p>After the last line in <code>fn main()</code> add a loop.</p>
+</li>
+<li>
+<p>Inside the loop, iterate over <code>events</code> with a <code>for</code> loop.</p>
+</li>
+<li>
+<p>Run the program. In your group, read and discuss the output on the screen. What information does it provide?</p>
+</li>
+</ol>
+<a class="header" href="#debugging" id="debugging"><h1>Debugging</h1></a>
+<a class="header" href="#iterators" id="iterators"><h2>Iterators</h2></a>
+<p>One of Rusts features are the ErrorMessages that acutally help. From the error message we learn, that the type of <code>events</code> is called <code>EventPump</code>, and where in <code>sdl2</code> it is defined. On order to be able to iterate over a type, it has to implement the <code>Iterator</code> trait, and apparently, <code>EventPump</code> does not. To fix this, we consult the documentation. Besides looking it up on the internet, using the command <code>cargo doc --open</code> is an elegant way of getting the documentation for all the crates in your project locally and open in a browser window.</p>
+<p>In the <code>sdl2</code> crate, go to EventPump. Look at the Implementation sections for this type. Can you find the <code>Iterator</code> trait? On the same page, look for a function, that returns an Iterator. On the page of the return type, check, if the <code>Iterator</code> trait is implemented.</p>
+<ol>
+<li>Call the function on events.</li>
+<li>To make things easier for later, we will give this loop the name <code>'game</code>.</li>
+</ol>
+<p>It should look like this:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+'game: loop {
+      for event in events.poll_iter() {
+          // handle user input here
+      }
+#}</code></pre></pre>
+<ol start="3">
+<li>Run the program. From the output on your screen, do you know what to do?</li>
+</ol>
+<a class="header" href="#mutability" id="mutability"><h2>Mutability</h2></a>
+<p>[explain Mutability and why iterators must be mutable.]</p>
+<ol start="4">
+<li>Run the program. Close the window.</li>
+</ol>
+<a class="header" href="#handling-user-input" id="handling-user-input"><h1>Handling User Input</h1></a>
+<a class="header" href="#enums-and-match" id="enums-and-match"><h2>enums and match</h2></a>
+<p>Yeah, it's kind of hard to close the window. The reason for this is, that we have not told our program how to deal with events, so it continues to run and we have to force it to quit. That's uncomfortable, let's change that.</p>
+<p>Go to the sdl2 documentation. go to the <code>event</code> module, find the <code>Event</code> enum. An enum in Rust is a type that represents data that is one of several possible variants. Each variant in the enum can optionally have data associated with it. Look at the possible event variants in the declaration of <code>Event</code>. We want to end the program by pushing <code>esc</code>. What variant are we looking for?</p>
+<p>In our game loop, we iterate over <code>events</code>. Depending on what kind of <code>event</code> is happening, we want the program to react in different ways. Pushing <code>space</code> means something different, then pushing <code>esc</code>. We will <code>match</code> the <code>event</code> to the variants of the enum <code>Event</code>.</p>
+<ol>
+<li>To be able to use the enum and work with keyboard input, we need to add the following dependencies:</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use sdl2::event::Event;
+use sdl2::keyboard::Keycode;
+#}</code></pre></pre>
+<ol start="2">
+<li>Enter the following lines into the <code>for</code> loop. <code>match</code> compares the value of the <code>event</code>-variable to the variants of the enum <code>Event</code>. If the value of the <code>event</code>-variable is a pressed <code>esc</code>-key, the <code>'game</code>-loop breaks. If value is something else, the loop continues. The last part of a <code>match</code> alwayzs needs to be <code>_ =&gt;</code>, the case that covers all cases that are not explicitly defined.</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+match event {
+        Event::KeyDown {
+              keycode: Some(Keycode::Escape),
+              ..
+          } =&gt; break 'game,
+
+          _ =&gt; continue 'game,
+      }
+#}</code></pre></pre>
+<ol start="3">
+<li>Run the program, try if the user Input you implemented works!</li>
+<li>To be able to close the window with a mouse click, change the first line of the <code>match</code> to include <code>Event::Quit { .. }</code>. The <code>'game</code> -loop breaks now if either the <code>esc</code>-key is pressed, or the quit-button is clicked with the curser.</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+match event {
+    Event::Quit { .. }
+    | Event::KeyDown {
+        keycode: Some(Keycode::Escape),
+        ..
+    } =&gt; break 'game,
+
+    _ =&gt; continue 'game,
+}
+
+#}</code></pre></pre>
+<a class="header" href="#initializing-the-grid" id="initializing-the-grid"><h1>Initializing the Grid</h1></a>
+<a class="header" href="#structs-and-vectors" id="structs-and-vectors"><h2>structs and vectors</h2></a>
+<p>Now that we have established a basic functionality, we will start drawing! As a base for our game, we will use a grid of cells. Using structs, we will define our own data types for them. [Explain structs].</p>
+<ol>
+<li>The <code>Grid</code>-struct has one Field named <code>grid</code>. The Datatype are vectors of <code>Cell</code>s as in a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct Grid {
+    grid: Vec&lt;Vec&lt;Cell&gt;&gt;,
+}
+#}</code></pre></pre>
+<ol start="2">
+<li>Write your own struct for the Cell type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: u8.</li>
+</ol>
+<p>Next, we need to initialize the grid.</p>
+<ol start="3">
+<li>Write function, use aids.</li>
+</ol>
+<a class="header" href="#modularization" id="modularization"><h1>Modularization</h1></a>
+<a class="header" href="#displaying-grid" id="displaying-grid"><h1>Displaying Grid</h1></a>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
