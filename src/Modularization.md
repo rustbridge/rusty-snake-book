@@ -6,16 +6,26 @@ Since this project will be bigger then  a couple of lines of code, things will b
 
 .
 ├── rusty snake
-|    ├── src
-|    |    ├── lib
-|    |    |    ├── mod.rs
-|    |    |    └──  types.rs
-|    |    |
-|    |    └──  main.rs
-|    |   
-|    ├── Cargo.lock
-|    └──  Cargo.toml
+│     ├── src
+│     │     ├── lib
+│     │     │     ├── mod.rs
+│     │     │     └──  types.rs
+│     │     │ 
+│     │     └──  main.rs
+│     │    
+│     ├── Cargo.lock
+│     └──  Cargo.toml
 └── ...
+
+.
+    ├── ...
+    ├── docs                    # Documentation files (alternatively `doc`)
+    │   ├── TOC.md              # Table of contents
+    │   ├── faq.md              # Frequently asked questions
+    │   ├── misc.md             # Miscellaneous information
+    │   ├── usage.md            # Getting started guide
+    │   └── ...                 # etc.
+    └── ...
 
 Move all functions you wrote to `mod.rs`. In order for this to work, all dependencies, these functions need, also need to be declared in `mod.rs`. If they are not used in `main.rs`, you can delete them there.
 
@@ -40,4 +50,4 @@ let (canvas, mut events) = lib::init(canvas_width, canvas_height);
 
 ```
 
-Types also must be indicated. 
+Types also must be indicated.
