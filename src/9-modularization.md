@@ -10,7 +10,7 @@ Since this project will be bigger then  a couple of lines of code, things will b
 │    ├── src
 │    │    ├── lib
 │    │    │    ├── mod.rs
-│    │    │    └──  types.rs
+│    │    │    └── types.rs
 │    │    │
 │    │    └──  main.rs
 │    │    
