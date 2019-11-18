@@ -15,7 +15,7 @@ Since this project will be bigger then  a couple of lines of code, things will b
 │    │    └──  main.rs
 │    │    
 │    ├── Cargo.lock
-│    └──  Cargo.toml
+│    └── Cargo.toml
 └── ...
 ```
 
@@ -26,7 +26,7 @@ Move all structs to `types.rs`.
 
 ## Making Functions and structs Public
 
-In order for a function to be accessible in `main.rs`, it needs to be marked with `pub`. Same goes for all the structs, including their fields.
+In order for a function to be accessible in `main.rs`, it needs to be marked with `pub`.
 
 ## Accessing the Modules in `main.rs`
 

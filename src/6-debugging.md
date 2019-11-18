@@ -2,7 +2,7 @@
 
 ## Iterators
 
-One of Rusts features are the ErrorMessages that actually help. From the error message we learn, that the type of `events` is called `EventPump`, and where in `sdl2` it is defined. On order to be able to iterate over a type, it has to implement the `Iterator` trait, and apparently, `EventPump` does not. To fix this, we consult the documentation. Besides looking it up on the internet, using the command `cargo doc --open` is an elegant way of getting the documentation for all the crates in your project locally and open in a browser window.
+One of Rusts features are the error messages that actually help. From the error message we learn, that the type of `events` is called `EventPump`, and where in `sdl2` it is defined. In order to be able to iterate over a type, it has to implement the `Iterator` trait, and apparently, `EventPump` does not. To fix this, we consult the documentation. Besides looking it up on the internet, using the command `cargo doc --open` is an elegant way of getting the documentation for all the crates in your project locally and open in a browser window.
 
 In the `sdl2` crate, go to EventPump. Look at the Implementation sections for this type. Can you find the `Iterator` trait? On the same page, look for a function, that returns an Iterator. On the page of the return type, check, if the `Iterator` trait is implemented.
 

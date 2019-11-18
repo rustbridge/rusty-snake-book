@@ -1,11 +1,8 @@
-# Displaying Frames
+# Displaying the grid in Frames
 
-Each animation step is displayed in a new frame. For each frame, the grid is drawn by displaying each single cell as a rectangle. `sdl` offers methods to draw basic shapes, like rectangles, this needs to be imported. It also offers methods that convert our u8 values into RGB colors, that can be displayed.
+For each frame, the grid is drawn by displaying each single cell as a rectangle.
 
-```rust
-use sdl2::rect::Rect;
-use sdl2::pixels::Color;
-```
+
 
 Next, we will write a function, that converts row column values of a single Cell into x and y pixels and draws a rectangle in the specified color.
 ```rust

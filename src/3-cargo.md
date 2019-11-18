@@ -1,10 +1,16 @@
 # Cargo and Dependencies
 
-To use SDL2 in rust, we need to add the sdl2 crate in the dependency as a dependency.
+To initialize a new project, run `cargo new`:
 
-{insert explanation about cargo}
+```shell
+$ cargo new rusty_snake
+```
 
-Open the file `cargo.toml` in the editor of your choice.
+cargo generated a new new folder called `rust_snake`. `cd` into the directory to check out what cargo generated.
+
+
+Open the file `cargo.toml` in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.
+
 
 It should look like this:
 
@@ -23,10 +29,14 @@ edition = "2018"
 
 
 ```
+To use SDL2 in rust, we need to add the sdl2 crate as dependency.
+
 Add the following line in the [dependencies] section:
 `sdl2 = "0.30.0"`
 
 open `src/main.rs`
+
+Substitute the content of the file with the following code: 
 
 ```rust
 // Dependencies go here

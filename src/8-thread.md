@@ -2,7 +2,7 @@
 
 Rust is famous for its save and easy way to write multithreaded programs. We don't need this program to be multithreaded now, but it comes with a handy sleep mode, that we need.
 
-to spawn a thread, add these lines before `'game`:
+To spawn a thread, add these lines before `'game`:
 
 ```rust
 thread::spawn(move || {

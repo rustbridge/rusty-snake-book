@@ -1,5 +1,7 @@
 # Initializing the Canvas
 
+Our game needs a canvas. Let's initialize it. 
+
 ## Functions and variables
 
 
