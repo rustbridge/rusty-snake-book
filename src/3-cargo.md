@@ -36,7 +36,7 @@ Add the following line in the [dependencies] section:
 
 open `src/main.rs`
 
-Substitute the content of the file with the following code: 
+Substitute the content of the file with the following code:
 
 ```rust
 // Dependencies go here
@@ -45,12 +45,12 @@ Substitute the content of the file with the following code:
 
 
 // this function initializes the canvas
-fn init<'a>(x: i32, y: i32) -> (Canvas<Window>, EventPump) {
+fn init<'a>(x: u32, y: u32) -> (Canvas<Window>, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
     let window = video_subsystem
-        .window("Squares", x as u32 + 1, y as u32 + 1)
+        .window("Game", x + 1, y + 1)
         .position_centered()
         .build()
         .unwrap();
