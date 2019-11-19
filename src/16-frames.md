@@ -3,36 +3,16 @@
 For each frame, the grid is drawn by displaying each single cell as a rectangle.
 
 
-
-Next, we will write a function, that converts row column values of a single Cell into x and y pixels and draws a rectangle in the specified color.
-```rust
-fn display_cell(
-    renderer: Canvas<Window>,
-    row: i32,
-    col: i32,
-    grid_data: Grid,
-    cell_width: i32,
-) {
-    //cell cell_height is the same as cell_width
-    //define a variable that is bound to the field grid of Grid
-    //convert row and column values of this cell into x and y pixels
-    //define a variable that is bound to the Cell.
-    //define a variable drawing_drawing color, calling Color::RGB(red, green, blue)
-}
-```
-
-Add both of these functions to your program.
+`fn display_cell` converts row column values of a single Cell into x and y pixels and draws a rectangle in the specified color at the specified coordinate.
 
 ```rust
-
-
 
 pub fn display_cell(
     renderer: &mut Canvas<Window>,
-    row: i32,
-    col: i32,
+    row: u32,
+    col: u32,
     grid_data: &Grid,
-    cell_width: &i32,
+    cell_width: &u32,
 ) {
     let cell_height = cell_width;
 
@@ -41,24 +21,34 @@ pub fn display_cell(
     let x = cell_width * col;
     let y = cell_width * row;
 
-    let cell_color = &grid[row as usize][col as usize];
-    let drawing_color = Color::RGB(cell_color.red, cell_color.green, cell_color.blue);
+    //For now, we want random colors, to see what happens.
+    // let cell_color = &grid[row as usize][col as usize];
+    // let drawing_color = Color::RGB(cell_color.red, cell_color.green, cell_color.blue);
+
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    let drawing_color = Color::RGB(red, green, blue);
 
     renderer.set_draw_color(drawing_color);
-    let square = renderer.fill_rect(Rect::new(x, y, *cell_width as u32, *cell_height as u32));
+    let square = renderer.fill_rect(Rect::new(x, y, *cell_width, *cell_height));
     match square {
         Ok(()) => {}
         Err(error) => println!("{}", error),
     }
 }
+```
 
-//displays the whole grid by repeatedly calling display_cell on every cell
+`fn display_frame` displays the whole grid by repeatedly calling `fn display_cell` on every cell in the grid.
+
+```rust
 pub fn display_frame(
     renderer: &mut Canvas<Window>,
     grid: &Grid,
-    nx_cells: &i32,
-    ny_cells: &i32,
-    cell_width: &i32,
+    nx_cells: &u32,
+    ny_cells: &u32,
+    cell_width: &u32,
 ) {
 
 
@@ -73,3 +63,11 @@ pub fn display_frame(
     renderer.present();
 }
 ```
+Add both of these functions to your program. Discuss, how the compare to `fn display_rectangle`. Then delete `fn display_rectangle`, as is not needed anymore.
+
+Substitute the line that calls `fn display_rectangle` with the following line:
+
+```rust
+lib::display_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
+```
+Run the program! Enjoy!
