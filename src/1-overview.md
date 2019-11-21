@@ -1,11 +1,3 @@
 # Learning Rust by Coding a Game of Snake
 
-## Target Group
-
-This tutorial is targeted at people who already know how to code in a different language.
-
-[List things we expect to know]
-
-## Why coding a game?
-
-##
+In this tutorial you will write a very simple game engine for a snake game, while learning the basics of Rust. You can also use and adapt the game engine to write any other old school pixely 2D game. 
