@@ -43,7 +43,7 @@ The `clear()` method is called on the renderer, this clears the canvas. When, li
 Then, the drawing color is defined. We use a function that is provided by `sdl2`, the function takes in three `u8` values and returns a color.
 The method `set_draw_color()` is called on the renderer, with `drawing_color` as argument.
 
-We create a new rectangle with it's minimum and maximum x and y values as arguments and bind it to the variable `square_definition`. This variable is then passed to the method `fill_rect()`. Our square is rendered and put into the backbuffer.
+We create a new rectangle with it's minimum and maximum x and y values as arguments and bind it to the variable `square_definition`. This variable is then passed to the method `fill_rect()`. Our square is rendered and put into the back buffer.
 
 The last line updates the screen with all the rendering done since the last update.
 

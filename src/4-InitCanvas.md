@@ -1,6 +1,6 @@
 # Initializing the Canvas
 
-Our game needs a canvas. Let's initialize it.
+Our game needs a canvas, where all the games graphic is rendered. Let's initialize it.
 
 ## Functions and variables
 
@@ -33,10 +33,10 @@ fn init<'a>(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
 }
 
 ```
- `fn` declares the function, `init` is its name. `<'a>` indicates its lifetime. Lifetimes are unique to rust, declaring them is not needed for most functions, so we will just acknowledge its existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be indicated. In this example, the type of both parameters is `u32`, a 32bit unsigned integer. The return types also need to be specifically named. `fn init` returns two values in a bracket, separated by a comma. The types of these values are defined in the sdl2-crate. We'll ignore the body of the function for now.
+ `fn` declares the function, `init` is its name. `<'a>` indicates its lifetime. Lifetimes are unique to Rust, declaring them is not needed for most functions, so we will just acknowledge their existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be explicitly indicated. In this example, the type of both parameters is `u32`, a 32bit unsigned integer. The return types also need to be specifically named. `fn init` returns two values in a bracket, separated by a comma. The types of these values are defined in the `sdl2`-crate. We'll ignore the body of the function for now.
 
 1. In `main()`, delete the `println!` statement.
-2. Declare the variables `canvas_width` and `canvas_height`, each with the value 720.
+2. Declare the variables `canvas_width` and `canvas_height`, each with the value `720_u32`. `_32` makes this number explicitly an unsigned 32bit integer. 
 3. Call the function by adding the following line:
 ```rust
 let (canvas, events) = init(canvas_width, canvas_height);

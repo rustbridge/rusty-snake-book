@@ -2,6 +2,8 @@
 
 For each frame, the grid is drawn by displaying each single cell as a rectangle.
 
+In `fn main()`, right after we defined the variables for rows and columns, define a variable for `cell_width` and calculate its value.
+
 
 `fn display_cell` converts row column values of a single Cell into x and y pixels and draws a rectangle in the specified color at the specified coordinate.
 

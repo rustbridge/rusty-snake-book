@@ -22,8 +22,6 @@ Since this project will be bigger then  a couple of lines of code, things will b
 
 Move all functions you wrote to `mod.rs`. In order for this to work, all dependencies, these functions need, also need to be declared in `mod.rs`. If they are not used in `main.rs`, you can delete them there.
 
-Move all structs to `types.rs`.
-
 ## Making Functions and structs Public
 
 In order for a function to be accessible in `main.rs`, it needs to be marked with `pub`.
@@ -36,11 +34,9 @@ Before `fn main()` add the following line:
 pub mod lib
 ```
 
-functions now have to be called in the namespace of the module:
+Functions now have to be called in the namespace of the module:
 
 ```rust
 let (canvas, mut events) = lib::init(canvas_width, canvas_height);
 
 ```
-
-Types also must be indicated.
