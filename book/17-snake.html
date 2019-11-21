@@ -142,8 +142,18 @@
                     <main>
                         <a class="header" href="#adding-the-snake" id="adding-the-snake"><h1>Adding the snake</h1></a>
 <p>Well, maybe not a snake yet, but a square that moves according to your wishes! In this section, you can try to apply what you have learned so far. If you don't know how to continue, you can either ask for help, or look at one way of solving the problems on the next page.</p>
-<p>In the <code>lib</code> folder, make a new file called <code>snake.rs</code>.</p>
-<p>Write a function that initialises the snake as a <code>SnakeHead</code>. <code>SnakeHead</code> is a struct, that contains fields for a row, a column and a <code>Cell</code> value. The row and column values need to be <code>i32</code> instead of <code>u32</code>. Why?</p>
+<ol>
+<li>In the <code>lib</code> folder, make a new file called <code>snake.rs</code>.</li>
+<li>Add the following line to the top of <code>snake.rs</code></li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use crate::lib::types::{Cell, SnakeHead, Grid};
+#}</code></pre></pre>
+<ol start="3">
+<li>Write a function that initialises the snake as a <code>SnakeHead</code>. <code>SnakeHead</code> is a struct, that contains fields for a row, a column and a <code>Cell</code> value. The row and column values need to be <code>i32</code> instead of <code>u32</code>. Why?</li>
+</ol>
 <a class="header" href="#defining-a-tuple" id="defining-a-tuple"><h2>Defining a tuple</h2></a>
 <p>In <code>fn main()</code>, after the grid is initialized, we define a tuple for direction. <code>direction.0</code> is the row value, <code>direction.1</code> is the column value.</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -153,7 +163,7 @@ let mut direction = (1, 0);
 #}</code></pre></pre>
 <a class="header" href="#movement" id="movement"><h2>Movement</h2></a>
 <ol>
-<li>Write a function, that takes a mutable reference of the <code>SnakeHead</code>. It calculates a new position with <code>direction</code> values and the coordinates from <code>SnakeHead</code> and then returns a new <code>SnakeHead</code> with an updated position.</li>
+<li>In <code>snake.rs</code>, write a function, that takes a mutable reference of the <code>SnakeHead</code>. It calculates a new position with <code>direction</code> values and the coordinates from <code>SnakeHead</code> and then returns a new <code>SnakeHead</code> with an updated position.</li>
 <li>Write a function, that takes ownership of the grid, changes the color of the square, where the current <code>SnakeHead</code> is located. The grid is then the return value.</li>
 </ol>
 <a class="header" href="#adding-user-input" id="adding-user-input"><h2>Adding User Input</h2></a>
@@ -161,6 +171,23 @@ let mut direction = (1, 0);
 <li>Add Events for <code>up</code>, <code>down</code>, <code>left</code> and <code>right</code> key.</li>
 <li>How does the <code>direction.0</code> and the <code>direction.1</code> value change, when each of these buttons is pushed? Implement it!</li>
 </ol>
+<a class="header" href="#changing-the-game-loop" id="changing-the-game-loop"><h2>Changing the Game Loop</h2></a>
+<ol>
+<li>Add this line to the top of <code>main.rs</code>:</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use crate::lib::snake;
+#}</code></pre></pre>
+<ol start="2">
+<li>Call the functions in the following order:</li>
+</ol>
+<ul>
+<li>update position of snake</li>
+<li>update grid with position of snake</li>
+<li>display frame</li>
+</ul>
 <p>Run the game! Play the game!</p>
 
                     </main>

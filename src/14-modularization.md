@@ -22,6 +22,9 @@ Since this project will be bigger then  a couple of lines of code, things will b
 
 Move all functions you wrote to `mod.rs`. In order for this to work, all dependencies, these functions need, also need to be declared in `mod.rs`. If they are not used in `main.rs`, you can delete them there.
 
+## Dependencies
+Dependencies for the moved functions have to be moved to `mod.rs` too.
+
 ## Making Functions and structs Public
 
 In order for a function to be accessible in `main.rs`, it needs to be marked with `pub`.

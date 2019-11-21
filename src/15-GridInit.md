@@ -7,9 +7,10 @@ In the very basic version, the snake will be a square block, moving around in a 
 
 ### Structs and Vectors
 
-Using structs, we will define our own data types for the grid and the cells. [Explain structs].
+Structs are a datatype, that can contain several fields, the fields do not have to be of the same datatype.
+Using structs, we will define our own data types for the grid and the cells. Both struct definition go into `types.rs`
 
-1. The `Grid`-struct has one field named `grid`. The datatypes are vectors of `Cell`s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.
+1. Let's define the `Grid`-struct. It has one field named `grid`. The datatypes are vectors of `Cell`s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.
 
 ``` rust
 pub struct Grid {
@@ -18,9 +19,17 @@ pub struct Grid {
 ```
 2. Write your own struct for the `Cell` type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: `u8`.
 
+3. Add the following lines to `mod.rs` to be able to use the types there.
+
+```rust
+pub mod types;
+
+use types::{Grid, Cell};
+```
+
 Next, we need to initialize the grid.
 
-3. Add this function to `mod.rs`
+4. Add this function to `mod.rs`
 
 ```rust
 pub fn grid_init(nx_cells: u32, ny_cells: u32) -> Grid {
@@ -41,8 +50,8 @@ pub fn grid_init(nx_cells: u32, ny_cells: u32) -> Grid {
     grid
 }
 ```
-4. Discuss in your group, what this function does, line by line.
-5. Add the following line before you spawn the thread.
+5. Discuss in your group, what this function does, line by line.
+6. Add the following line in `fn main()` before you spawn the thread.
 
 ```rust
 let mut grid = lib::grid_init(columns, rows);

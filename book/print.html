@@ -590,6 +590,8 @@ Change the code above and execute!</p>
 └── ...
 </code></pre>
 <p>Move all functions you wrote to <code>mod.rs</code>. In order for this to work, all dependencies, these functions need, also need to be declared in <code>mod.rs</code>. If they are not used in <code>main.rs</code>, you can delete them there.</p>
+<a class="header" href="#dependencies" id="dependencies"><h2>Dependencies</h2></a>
+<p>Dependencies for the moved functions have to be moved to <code>mod.rs</code> too.</p>
 <a class="header" href="#making-functions-and-structs-public" id="making-functions-and-structs-public"><h2>Making Functions and structs Public</h2></a>
 <p>In order for a function to be accessible in <code>main.rs</code>, it needs to be marked with <code>pub</code>.</p>
 <a class="header" href="#accessing-the-modules-in-mainrs" id="accessing-the-modules-in-mainrs"><h2>Accessing the Modules in <code>main.rs</code></h2></a>
@@ -610,9 +612,10 @@ let (canvas, mut events) = lib::init(canvas_width, canvas_height);
 <p>Now that we have set up the very basic framework for graphic output, we want to add some actual game elements.</p>
 <p>In the very basic version, the snake will be a square block, moving around in a grid. The food for the snake is a static square block of a different color. As the snake moves and eats the food by moving over it, the snake gets longer by one block. If the snake moves over its own parts, the game is over and restarts. If the snake moves out of the canvas, it reenters it on the other side.</p>
 <a class="header" href="#structs-and-vectors" id="structs-and-vectors"><h3>Structs and Vectors</h3></a>
-<p>Using structs, we will define our own data types for the grid and the cells. [Explain structs].</p>
+<p>Structs are a datatype, that can contain several fields, the fields do not have to be of the same datatype.
+Using structs, we will define our own data types for the grid and the cells. Both struct definition go into <code>types.rs</code></p>
 <ol>
-<li>The <code>Grid</code>-struct has one field named <code>grid</code>. The datatypes are vectors of <code>Cell</code>s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
+<li>Let's define the <code>Grid</code>-struct. It has one field named <code>grid</code>. The datatypes are vectors of <code>Cell</code>s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -622,10 +625,22 @@ pub struct Grid {
 }
 #}</code></pre></pre>
 <ol start="2">
-<li>Write your own struct for the <code>Cell</code> type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: <code>u8</code>.</li>
+<li>
+<p>Write your own struct for the <code>Cell</code> type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: <code>u8</code>.</p>
+</li>
+<li>
+<p>Add the following lines to <code>mod.rs</code> to be able to use the types there.</p>
+</li>
 </ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub mod types;
+
+use types::{Grid, Cell};
+#}</code></pre></pre>
 <p>Next, we need to initialize the grid.</p>
-<ol start="3">
+<ol start="4">
 <li>Add this function to <code>mod.rs</code></li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
@@ -649,9 +664,9 @@ pub fn grid_init(nx_cells: u32, ny_cells: u32) -&gt; Grid {
     grid
 }
 #}</code></pre></pre>
-<ol start="4">
+<ol start="5">
 <li>Discuss in your group, what this function does, line by line.</li>
-<li>Add the following line before you spawn the thread.</li>
+<li>Add the following line in <code>fn main()</code> before you spawn the thread.</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -732,8 +747,18 @@ lib::display_frame(&amp;mut canvas, &amp;grid, &amp;columns, &amp;rows, &amp;cel
 <p>Run the program! Enjoy!</p>
 <a class="header" href="#adding-the-snake" id="adding-the-snake"><h1>Adding the snake</h1></a>
 <p>Well, maybe not a snake yet, but a square that moves according to your wishes! In this section, you can try to apply what you have learned so far. If you don't know how to continue, you can either ask for help, or look at one way of solving the problems on the next page.</p>
-<p>In the <code>lib</code> folder, make a new file called <code>snake.rs</code>.</p>
-<p>Write a function that initialises the snake as a <code>SnakeHead</code>. <code>SnakeHead</code> is a struct, that contains fields for a row, a column and a <code>Cell</code> value. The row and column values need to be <code>i32</code> instead of <code>u32</code>. Why?</p>
+<ol>
+<li>In the <code>lib</code> folder, make a new file called <code>snake.rs</code>.</li>
+<li>Add the following line to the top of <code>snake.rs</code></li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use crate::lib::types::{Cell, SnakeHead, Grid};
+#}</code></pre></pre>
+<ol start="3">
+<li>Write a function that initialises the snake as a <code>SnakeHead</code>. <code>SnakeHead</code> is a struct, that contains fields for a row, a column and a <code>Cell</code> value. The row and column values need to be <code>i32</code> instead of <code>u32</code>. Why?</li>
+</ol>
 <a class="header" href="#defining-a-tuple" id="defining-a-tuple"><h2>Defining a tuple</h2></a>
 <p>In <code>fn main()</code>, after the grid is initialized, we define a tuple for direction. <code>direction.0</code> is the row value, <code>direction.1</code> is the column value.</p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -743,7 +768,7 @@ let mut direction = (1, 0);
 #}</code></pre></pre>
 <a class="header" href="#movement" id="movement"><h2>Movement</h2></a>
 <ol>
-<li>Write a function, that takes a mutable reference of the <code>SnakeHead</code>. It calculates a new position with <code>direction</code> values and the coordinates from <code>SnakeHead</code> and then returns a new <code>SnakeHead</code> with an updated position.</li>
+<li>In <code>snake.rs</code>, write a function, that takes a mutable reference of the <code>SnakeHead</code>. It calculates a new position with <code>direction</code> values and the coordinates from <code>SnakeHead</code> and then returns a new <code>SnakeHead</code> with an updated position.</li>
 <li>Write a function, that takes ownership of the grid, changes the color of the square, where the current <code>SnakeHead</code> is located. The grid is then the return value.</li>
 </ol>
 <a class="header" href="#adding-user-input" id="adding-user-input"><h2>Adding User Input</h2></a>
@@ -751,8 +776,140 @@ let mut direction = (1, 0);
 <li>Add Events for <code>up</code>, <code>down</code>, <code>left</code> and <code>right</code> key.</li>
 <li>How does the <code>direction.0</code> and the <code>direction.1</code> value change, when each of these buttons is pushed? Implement it!</li>
 </ol>
+<a class="header" href="#changing-the-game-loop" id="changing-the-game-loop"><h2>Changing the Game Loop</h2></a>
+<ol>
+<li>Add this line to the top of <code>main.rs</code>:</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use crate::lib::snake;
+#}</code></pre></pre>
+<ol start="2">
+<li>Call the functions in the following order:</li>
+</ol>
+<ul>
+<li>update position of snake</li>
+<li>update grid with position of snake</li>
+<li>display frame</li>
+</ul>
 <p>Run the game! Play the game!</p>
 <a class="header" href="#solution-for-the-snake" id="solution-for-the-snake"><h1>Solution for the Snake</h1></a>
+<p><code>snake.rs</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use crate::lib::types::{Cell, SnakeHead, Grid};
+
+pub fn snake_init() -&gt; SnakeHead {
+    let snake = SnakeHead {
+                row: 6,
+                column: 6,
+                color: Cell {
+                    red: 200_u8,
+                    green: 0_u8,
+                    blue: 100_u8,
+                    }
+                };
+    snake
+}
+
+
+pub fn snake_moves(snake: &amp;mut SnakeHead, direction: (i32, i32)) -&gt; SnakeHead {
+    snake.row = snake.row + direction.0 ;
+    snake.column = snake.column + direction.1;
+
+
+    let new_snake = SnakeHead {
+        row: snake.row,
+        column: snake.column,
+        color: Cell {
+            red: 200_u8,
+            green: 0_u8,
+            blue: 100_u8,
+            }
+
+    };
+
+    new_snake
+}
+
+pub fn draw_grid_with_snake(mut grid: Grid, snake: &amp;SnakeHead) -&gt; Grid {
+
+    let color = Cell {
+        red: snake.color.red,
+        green: snake.color.green,
+        blue: snake.color.green,
+    };
+
+
+    grid.grid[snake.row as usize][snake.column as usize] = color;
+    grid
+}
+#}</code></pre></pre>
+<p><code>types.rs</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct SnakeHead {
+    pub row: i32,
+    pub column: i32,
+    pub color: Cell,
+}
+
+#}</code></pre></pre>
+<p>Content of <code>'game</code> in <code>main.rs</code></p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+for event in events.poll_iter() {
+
+        match event {
+            Event::KeyDown {
+               keycode: Some(Keycode::Up),
+               ..
+           } =&gt; {
+               direction.0 = -1;
+               direction.1 = 0;
+               }
+
+           Event::KeyDown {
+               keycode: Some(Keycode::Down),
+               ..
+           } =&gt; {
+               direction.0 = 1;
+               direction.1 = 0;
+               }
+
+           Event::KeyDown {
+               keycode: Some(Keycode::Left),
+               ..
+           } =&gt; {
+               direction.1 = -1;
+               direction.0 = 0;
+               }
+
+           Event::KeyDown {
+               keycode: Some(Keycode::Right),
+               ..
+           } =&gt; {
+               direction.1 = 1;
+               direction.0 = 0;
+               }
+            Event::Quit { .. }
+            | Event::KeyDown {
+                keycode: Some(Keycode::Escape),
+                ..
+            } =&gt; break 'game,
+
+            _ =&gt; continue 'game,
+        }
+    }
+
+    snake = snake::snake_moves(&amp;mut snake, direction);
+    grid = snake::draw_grid_with_snake(grid, &amp;snake);
+    lib::display_frame(&amp;mut canvas, &amp;grid, &amp;columns, &amp;rows, &amp;cell_width);
+#}</code></pre></pre>
 
                     </main>
 

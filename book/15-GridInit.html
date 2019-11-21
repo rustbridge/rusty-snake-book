@@ -144,9 +144,10 @@
 <p>Now that we have set up the very basic framework for graphic output, we want to add some actual game elements.</p>
 <p>In the very basic version, the snake will be a square block, moving around in a grid. The food for the snake is a static square block of a different color. As the snake moves and eats the food by moving over it, the snake gets longer by one block. If the snake moves over its own parts, the game is over and restarts. If the snake moves out of the canvas, it reenters it on the other side.</p>
 <a class="header" href="#structs-and-vectors" id="structs-and-vectors"><h3>Structs and Vectors</h3></a>
-<p>Using structs, we will define our own data types for the grid and the cells. [Explain structs].</p>
+<p>Structs are a datatype, that can contain several fields, the fields do not have to be of the same datatype.
+Using structs, we will define our own data types for the grid and the cells. Both struct definition go into <code>types.rs</code></p>
 <ol>
-<li>The <code>Grid</code>-struct has one field named <code>grid</code>. The datatypes are vectors of <code>Cell</code>s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
+<li>Let's define the <code>Grid</code>-struct. It has one field named <code>grid</code>. The datatypes are vectors of <code>Cell</code>s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -156,10 +157,22 @@ pub struct Grid {
 }
 #}</code></pre></pre>
 <ol start="2">
-<li>Write your own struct for the <code>Cell</code> type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: <code>u8</code>.</li>
+<li>
+<p>Write your own struct for the <code>Cell</code> type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: <code>u8</code>.</p>
+</li>
+<li>
+<p>Add the following lines to <code>mod.rs</code> to be able to use the types there.</p>
+</li>
 </ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub mod types;
+
+use types::{Grid, Cell};
+#}</code></pre></pre>
 <p>Next, we need to initialize the grid.</p>
-<ol start="3">
+<ol start="4">
 <li>Add this function to <code>mod.rs</code></li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
@@ -183,9 +196,9 @@ pub fn grid_init(nx_cells: u32, ny_cells: u32) -&gt; Grid {
     grid
 }
 #}</code></pre></pre>
-<ol start="4">
+<ol start="5">
 <li>Discuss in your group, what this function does, line by line.</li>
-<li>Add the following line before you spawn the thread.</li>
+<li>Add the following line in <code>fn main()</code> before you spawn the thread.</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
