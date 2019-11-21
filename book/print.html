@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="Overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="Installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="Cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="Debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="GridInit.html"><strong aria-hidden="true">8.</strong> Initializing Grid</a></li><li><a href="Modularization.html"><strong aria-hidden="true">9.</strong> Modularization</a></li><li><a href="GridDisplay.html"><strong aria-hidden="true">10.</strong> Displaying Grid</a></li></ol>
+            <ol class="chapter"><li><a href="1-overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="2-installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="3-cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="4-InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="5-InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="6-debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="7-UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="8-thread.html"><strong aria-hidden="true">8.</strong> Multithreading!</a></li><li><a href="9-frames.html"><strong aria-hidden="true">9.</strong> Animate!</a></li><li><a href="10-ResultType.html"><strong aria-hidden="true">10.</strong> Error Handling</a></li><li><a href="10-review.html"><strong aria-hidden="true">11.</strong> Review</a></li><li><a href="11-OwnershipBorrowing.html"><strong aria-hidden="true">12.</strong> Ownership and Borrowing</a></li><li><a href="12-dereferencing.html"><strong aria-hidden="true">13.</strong> Dereferencing</a></li><li><a href="13-animate.html"><strong aria-hidden="true">14.</strong> Animate!</a></li><li><a href="14-modularization.html"><strong aria-hidden="true">15.</strong> Modularization</a></li><li><a href="15-GridInit.html"><strong aria-hidden="true">16.</strong> Initializing the Grid</a></li><li><a href="16-frames.html"><strong aria-hidden="true">17.</strong> Displaying single cells</a></li><li><a href="17-snake.html"><strong aria-hidden="true">18.</strong> The Snake</a></li><li><a href="18-solution.html"><strong aria-hidden="true">19.</strong> Solution for the Snake</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -140,15 +140,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#chapter-1" id="chapter-1"><h1>Chapter 1</h1></a>
-<p>installation</p>
-<p>basic explanation</p>
-<p>sdl</p>
-<a class="header" href="#installation" id="installation"><h1>Installation</h1></a>
+                        <a class="header" href="#learning-rust-by-coding-a-game-of-snake" id="learning-rust-by-coding-a-game-of-snake"><h1>Learning Rust by Coding a Game of Snake</h1></a>
+<p>In this tutorial you will write a very simple game engine for a snake game, while learning the basics of Rust. You can also use and adapt the game engine to write any other old school pixely 2D game.</p>
+<a class="header" href="#standard-installation-of-the-rust-compiler-and-tools" id="standard-installation-of-the-rust-compiler-and-tools"><h1>Standard Installation of the Rust Compiler and Tools</h1></a>
+<a class="header" href="#linux-and-macos-users" id="linux-and-macos-users"><h2>Linux and MacOS Users</h2></a>
+<p>For these platforms, it is recommended to use the <a href="https://rustup.rs/">Official Rust Installation Process</a> via <code>rustup.rs</code>. When asked, the default settings (including the <code>stable</code> compiler) are suitable for this course.</p>
+<p>This will process will install a number of tools required for this course, including <code>rustc</code>, <code>cargo</code>, and <code>rustup</code>.</p>
+<a class="header" href="#windows-users" id="windows-users"><h2>Windows Users</h2></a>
+<p>Windows Users may need to install additional tools. Please refer to the <a href="https://doc.rust-lang.org/book/ch01-01-installation.html#installing-rustup-on-windows">following guide</a> for installation instructions for Windows.</p>
 <a class="header" href="#cargo-and-dependencies" id="cargo-and-dependencies"><h1>Cargo and Dependencies</h1></a>
-<p>To use SDL2 in rust, we need to add the sdl2 crate in the dependency as a dependency.</p>
-<p>{insert explanation about cargo}</p>
-<p>Open the file <code>cargo.toml</code> in the editor of your choice.</p>
+<p>To initialize a new project, run <code>cargo new</code>:</p>
+<pre><code class="language-shell">$ cargo new rusty_snake
+</code></pre>
+<p>Cargo generated a new new folder called <code>rusty_snake</code>. <code>cd</code> into the directory to check out what cargo generated.</p>
+<p>Open the file <code>cargo.toml</code> in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.</p>
 <p>It should look like this:</p>
 <p><code>cargo.toml</code></p>
 <pre><pre class="playpen"><code class="language-rust">
@@ -166,21 +171,23 @@ edition = &quot;2018&quot;
 
 
 #}</code></pre></pre>
+<p>To use SDL2 in rust, we need to add the sdl2 crate as dependency.</p>
 <p>Add the following line in the [dependencies] section:
 <code>sdl2 = &quot;0.30.0&quot;</code></p>
 <p>open <code>src/main.rs</code></p>
+<p>Substitute the content of the file with the following code:</p>
 <pre><pre class="playpen"><code class="language-rust">// Dependencies go here
 
 
 
 
 // this function initializes the canvas
-fn init&lt;'a&gt;(x: i32, y: i32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
+fn init&lt;'a&gt;(x: u32, y: u32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
     let window = video_subsystem
-        .window(&quot;Squares&quot;, x as u32 + 1, y as u32 + 1)
+        .window(&quot;Game&quot;, x + 1, y + 1)
         .position_centered()
         .build()
         .unwrap();
@@ -213,6 +220,7 @@ use sdl2::EventPump;
 <p>In your terminal, go into the folder <code>/rusty-snake</code>, and run the command <code>cargo run</code>.
 What do you see? To get rid of this warning, we need to call <code>fn init</code> in <code>main()</code>.</p>
 <a class="header" href="#initializing-the-canvas" id="initializing-the-canvas"><h1>Initializing the Canvas</h1></a>
+<p>Our game needs a canvas, where all the games graphic is rendered. Let's initialize it.</p>
 <a class="header" href="#functions-and-variables" id="functions-and-variables"><h2>Functions and variables</h2></a>
 <p>Let's take a closer look at <code>fn init</code>.</p>
 <p><code>main.rs</code></p>
@@ -221,7 +229,7 @@ What do you see? To get rid of this warning, we need to call <code>fn init</code
 
 #fn main() {
 // this function initializes the canvas
-fn init&lt;'a&gt;(width: i32, height: i32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
+fn init&lt;'a&gt;(width: u32, height: u32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
@@ -242,10 +250,10 @@ fn init&lt;'a&gt;(width: i32, height: i32) -&gt; (Canvas&lt;Window&gt;, EventPum
 }
 
 #}</code></pre></pre>
-<p><code>fn</code> declares the function, <code>init</code> is its name. <code>&lt;'a&gt;</code> indicates its lifetime. Lifetimes are unique to rust, declaring them is not needed for most functions, so we will just acknowledge its existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be indicated. In this example, the type of both parameters is <code>i32</code>, a 32bit integer. The return types also need to be specifically named. <code>fn init</code> returns two values in a bracket, separated by a comma. The types of these values are defined in the sdl2-crate. We'll ignore the body of the function for now.</p>
+<p><code>fn</code> declares the function, <code>init</code> is its name. <code>&lt;'a&gt;</code> indicates its lifetime. Lifetimes are unique to Rust, declaring them is not needed for most functions, so we will just acknowledge their existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be explicitly indicated. In this example, the type of both parameters is <code>u32</code>, a 32bit unsigned integer. The return types also need to be specifically named. <code>fn init</code> returns two values in a bracket, separated by a comma. The types of these values are defined in the <code>sdl2</code>-crate. We'll ignore the body of the function for now.</p>
 <ol>
 <li>In <code>main()</code>, delete the <code>println!</code> statement.</li>
-<li>Declare the variables <code>canvas_width</code> and <code>canvas_height</code>. [Values?]</li>
+<li>Declare the variables <code>canvas_width</code> and <code>canvas_height</code>, each with the value <code>720_u32</code>. <code>_32</code> makes this number explicitly an unsigned 32bit integer.</li>
 <li>Call the function by adding the following line:</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
@@ -258,14 +266,14 @@ let (canvas, events) = init(canvas_width, canvas_height);
 </ol>
 <a class="header" href="#the-game-loop" id="the-game-loop"><h1>The Game Loop</h1></a>
 <a class="header" href="#loops" id="loops"><h2>Loops</h2></a>
-<p>When running the program, we shouldn't see anything. If you don't see any error messages, the progamm compiles.
+<p>When running the program, we shouldn't see anything. If you don't see any error messages, the program compiles.
 We have initialized the canvas, but in order for the program to run continuously, we need a game loop.</p>
 <ol>
 <li>
-<p>After the last line in <code>fn main()</code> add a loop.</p>
+<p>After the last line inside <code>fn main()</code> add a <code>loop {}</code>.</p>
 </li>
 <li>
-<p>Inside the loop, iterate over <code>events</code> with a <code>for</code> loop.</p>
+<p>Inside this <code>loop</code>, iterate over <code>event</code> in <code>events</code> with a <code>for</code> loop.</p>
 </li>
 <li>
 <p>Run the program. In your group, read and discuss the output on the screen. What information does it provide?</p>
@@ -273,8 +281,8 @@ We have initialized the canvas, but in order for the program to run continuously
 </ol>
 <a class="header" href="#debugging" id="debugging"><h1>Debugging</h1></a>
 <a class="header" href="#iterators" id="iterators"><h2>Iterators</h2></a>
-<p>One of Rusts features are the ErrorMessages that acutally help. From the error message we learn, that the type of <code>events</code> is called <code>EventPump</code>, and where in <code>sdl2</code> it is defined. On order to be able to iterate over a type, it has to implement the <code>Iterator</code> trait, and apparently, <code>EventPump</code> does not. To fix this, we consult the documentation. Besides looking it up on the internet, using the command <code>cargo doc --open</code> is an elegant way of getting the documentation for all the crates in your project locally and open in a browser window.</p>
-<p>In the <code>sdl2</code> crate, go to EventPump. Look at the Implementation sections for this type. Can you find the <code>Iterator</code> trait? On the same page, look for a function, that returns an Iterator. On the page of the return type, check, if the <code>Iterator</code> trait is implemented.</p>
+<p>One of Rusts features are the error messages that actually help. From the error message we learn, that the type of <code>events</code> is called <code>EventPump</code>, and where in <code>sdl2</code> it is defined. In order to be able to iterate over a type, it has to implement the <code>Iterator</code> trait, and apparently, <code>EventPump</code> does not. To fix this, we consult the documentation. Besides looking it up on the internet, using the command <code>cargo doc --open</code> is an elegant way of getting the documentation for all the crates in your project locally and open in a browser window.</p>
+<p>In the <code>sdl2</code> crate documentation, go to <code>EventPump</code>. Look at the implementation section for this type. Can you find the <code>Iterator</code> trait? On the same page, look for a function, that returns an Iterator. On the page of this return type, check, if the <code>Iterator</code> trait is implemented.</p>
 <ol>
 <li>Call the function on events.</li>
 <li>To make things easier for later, we will give this loop the name <code>'game</code>.</li>
@@ -292,15 +300,15 @@ We have initialized the canvas, but in order for the program to run continuously
 <li>Run the program. From the output on your screen, do you know what to do?</li>
 </ol>
 <a class="header" href="#mutability" id="mutability"><h2>Mutability</h2></a>
-<p>[explain Mutability and why iterators must be mutable.]</p>
+<p>In Rust, variables are immutable by default. You have to make them mutable by declaring them as such with <code>let mut</code> instead of just <code>let</code>. Iterators need to be mutable, because in each step, an item from the iterator is consumed, to keep track of where it currently is in the iteration sequence. So the internal state of the iterator is changed, which is only be possible, if the variable is declared as mutable.</p>
 <ol start="4">
 <li>Run the program. Close the window.</li>
 </ol>
 <a class="header" href="#handling-user-input" id="handling-user-input"><h1>Handling User Input</h1></a>
 <a class="header" href="#enums-and-match" id="enums-and-match"><h2>enums and match</h2></a>
 <p>Yeah, it's kind of hard to close the window. The reason for this is, that we have not told our program how to deal with events, so it continues to run and we have to force it to quit. That's uncomfortable, let's change that.</p>
-<p>Go to the sdl2 documentation. go to the <code>event</code> module, find the <code>Event</code> enum. An enum in Rust is a type that represents data that is one of several possible variants. Each variant in the enum can optionally have data associated with it. Look at the possible event variants in the declaration of <code>Event</code>. We want to end the program by pushing <code>esc</code>. What variant are we looking for?</p>
-<p>In our game loop, we iterate over <code>events</code>. Depending on what kind of <code>event</code> is happening, we want the program to react in different ways. Pushing <code>space</code> means something different, then pushing <code>esc</code>. We will <code>match</code> the <code>event</code> to the variants of the enum <code>Event</code>.</p>
+<p>Go to the <code>sdl2</code> documentation. Go to the <code>event</code> module, find the <code>Event</code> <code>enum</code>. An <code>enum</code> in Rust is a type that represents data that is one of several possible variants. Each variant in the <code>enum</code> can optionally have data associated with it. Look at the possible <code>event</code> variants in the declaration of <code>Event</code>. We want to end the program by pushing <code>esc</code>. What variant are we looking for?</p>
+<p>In our game loop, we iterate over <code>events</code>. Depending on what kind of <code>event</code> is happening, we want the program to react in different ways. Pushing <code>space</code> means something different, then pushing <code>esc</code>. We will <code>match</code> the <code>event</code> to the variants of the enum <code>Event</code>. <code>match</code> is a way to control the the flow of the program, when there are several possible options, similar to <code>if</code> <code>else</code> statements.</p>
 <ol>
 <li>To be able to use the enum and work with keyboard input, we need to add the following dependencies:</li>
 </ol>
@@ -311,7 +319,7 @@ use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
 #}</code></pre></pre>
 <ol start="2">
-<li>Enter the following lines into the <code>for</code> loop. <code>match</code> compares the value of the <code>event</code>-variable to the variants of the enum <code>Event</code>. If the value of the <code>event</code>-variable is a pressed <code>esc</code>-key, the <code>'game</code>-loop breaks. If value is something else, the loop continues. The last part of a <code>match</code> alwayzs needs to be <code>_ =&gt;</code>, the case that covers all cases that are not explicitly defined.</li>
+<li>Enter the following lines into the <code>for</code> loop. <code>match</code> compares the value of the <code>event</code>-variable to the variants of the enum <code>Event</code>. If the value of the <code>event</code>-variable is a pressed <code>esc</code>-key, the <code>'game</code>-loop breaks. If value is something else, the loop continues. The last part of a <code>match</code> always needs to be <code>_ =&gt;</code>, the case that covers all cases that are not explicitly defined.</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
@@ -327,7 +335,7 @@ match event {
       }
 #}</code></pre></pre>
 <ol start="3">
-<li>Run the program, try if the user Input you implemented works!</li>
+<li>Run the program, try if the user input you implemented works!</li>
 <li>To be able to close the window with a mouse click, change the first line of the <code>match</code> to include <code>Event::Quit { .. }</code>. The <code>'game</code> -loop breaks now if either the <code>esc</code>-key is pressed, or the quit-button is clicked with the curser.</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
@@ -345,28 +353,406 @@ match event {
 }
 
 #}</code></pre></pre>
-<a class="header" href="#initializing-the-grid" id="initializing-the-grid"><h1>Initializing the Grid</h1></a>
-<a class="header" href="#structs-and-vectors" id="structs-and-vectors"><h2>structs and vectors</h2></a>
-<p>Now that we have established a basic functionality, we will start drawing! As a base for our game, we will use a grid of cells. Using structs, we will define our own data types for them. [Explain structs].</p>
+<a class="header" href="#multithreading" id="multithreading"><h1>Multithreading</h1></a>
+<p>Rust is famous for its safe and easy way to write multithreaded programs. We don't need this program to be multithreaded yet, but it comes with a handy sleep mode, that we need.</p>
+<p>To spawn a thread, add these lines before <code>'game</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+thread::spawn(move || {
+    // some work here
+    });
+#}</code></pre></pre>
+<p>Inside, at the end of <code>'game</code>, add this line:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+thread::sleep(time::Duration::from_millis(800));
+#}</code></pre></pre>
+<p><code>'game</code> will now sleep 800 milliseconds, before starting over.</p>
+<a class="header" href="#frames" id="frames"><h1>Frames.</h1></a>
+<p>Each animation step is displayed in a new frame. We will now draw a rectangle of the size of the canvas, with a different random color.</p>
+<p><code>sdl</code> offers methods to draw basic shapes, like rectangles, this needs to be imported. It also offers methods that convert our u8 values into RGB colors, that can be displayed.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use sdl2::rect::Rect;
+use sdl2::pixels::Color;
+
+use rand;
+
+#}</code></pre></pre>
+<p>Add the following function to your program.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+fn display_rectangle (
+    renderer: &amp;mut Canvas&lt;Window&gt;,
+    canvas_width: &amp;u32,
+    canvas_height: &amp;u32,
+
+) {
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    renderer.clear();
+
+    let drawing_color = Color::RGB(red, green, blue);
+    renderer.set_draw_color(drawing_color);
+
+    let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
+    renderer.fill_rect(square_definition);
+
+    renderer.present();
+}
+
+#}</code></pre></pre>
+<p>The function takes the canvas, as well as the canvas width and height as arguments. It does not return a value. In the body of the function, the variables red, green and blue are assigned random <code>u8</code> numbers.
+The <code>clear()</code> method is called on the renderer, this clears the canvas. When, like in our case, the entire canvas is drawn over, this does not really matter, but it's a good habit, to think of this.
+Then, the drawing color is defined. We use a function that is provided by <code>sdl2</code>, the function takes in three <code>u8</code> values and returns a color.
+The method <code>set_draw_color()</code> is called on the renderer, with <code>drawing_color</code> as argument.</p>
+<p>We create a new rectangle with it's minimum and maximum x and y values as arguments and bind it to the variable <code>square_definition</code>. This variable is then passed to the method <code>fill_rect()</code>. Our square is rendered and put into the back buffer.</p>
+<p>The last line updates the screen with all the rendering done since the last update.</p>
+<p>Do you notice anything peculiar about some of the type declarations in this function?</p>
+<p>Run the program.</p>
+<a class="header" href="#error-handling-with-the-result-type" id="error-handling-with-the-result-type"><h1>Error Handling with the Result Type</h1></a>
 <ol>
-<li>The <code>Grid</code>-struct has one Field named <code>grid</code>. The Datatype are vectors of <code>Cell</code>s as in a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
+<li>
+<p>Check the <code>sdl2</code> documentation for the return value of the <code>fill_rect()</code> method. Research in the <code>std</code> documentation how to use this value.</p>
+</li>
+<li>
+<p>Change the code.</p>
+</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-struct Grid {
-    grid: Vec&lt;Vec&lt;Cell&gt;&gt;,
+let square = renderer.fill_rect(square_definition);
+match square {
+    Ok(()) =&gt; {}
+    Err(error) =&gt; println!(&quot;{}&quot;, error),
+}
+#}</code></pre></pre>
+<a class="header" href="#what-happened-so-far" id="what-happened-so-far"><h1>What happened so far?</h1></a>
+<p>This setup is the base for any other program with graphic output.</p>
+<p>So far you have learned, how to install Rust and initialize a new Rust project with cargo. You know what a cargo manifest is, and you can add dependencies. You have learned how to declare mutable and immutable variables and how to write functions. You can know use two different types of loops and can iterate over something. You got to know Rust's awesome error messages. You know what an enum is and can use <code>match</code> for control flow. You can look things up in the documentation. You made your first experience in handling errors and took the first step to write a multithreaded program.</p>
+<p>Awesome!!!!</p>
+<a class="header" href="#ownership-and-borrowing" id="ownership-and-borrowing"><h1>Ownership and Borrowing</h1></a>
+<p>We're finally getting to something that is very exclusively Rusty: Ownership, referencing and borrowing. Ownership guarantees the memory safety of Rust. Each value has a variable, that is called its owner. There can only be one owner at a time. When the value goes out of scope, the value will be dropped.</p>
+<ol>
+<li>Uncomment one <code>println!</code> statement at a time, to find out, where <code>s</code> is in scope und where it is not. Run the code in this window.</li>
+<li>Why is <code>s</code> not in scope, after it moved into the function?</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let s = String::from(&quot;hello&quot;);  
+    //println!(&quot;{}&quot;, s)
+
+    takes_ownership(s);
+
+    //println!(&quot;{}&quot;, s)           
+
+}
+//println!(&quot;{}&quot;, s)
+
+fn takes_ownership(some_string: String) {
+    println!(&quot;{}&quot;, some_string);
+}
+
+</code></pre></pre>
+<p>So yeah, if you don't want to hand over the ownership of your value to the function, the function can borrow it. A borrowed value is indicated by the <code>&amp;</code> operator. This is also called referencing a value.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let s = String::from(&quot;hello&quot;);  
+
+    borrows_value(&amp;s);
+
+    println!(&quot;{}&quot;, s)           
+
+}
+
+fn borrows_value(some_string: &amp;String) {
+    println!(&quot;{}&quot;, some_string);
+}
+
+</code></pre></pre>
+<ol start="3">
+<li>What happens, if the borrowed value is changed?</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let s = String::from(&quot;hello&quot;);
+
+    change(&amp;s);
+}
+
+fn change(some_string: &amp;String) {
+    some_string.push_str(&quot;, world&quot;);
+}
+
+</code></pre></pre>
+<p>References are immutable by default. To make the reference mutable, the variable has to be declared mutable, and <code>&amp;s</code> changes to <code>&amp;mut s</code>, same goes for <code>&amp;String</code>. Try it!
+But there are two restrictions:</p>
+<ul>
+<li>There can only be one mutable reference to a value!</li>
+<li>A value can not be borrowed mutable and immutable!</li>
+</ul>
+<p>Take another look at <code>fn display_frame</code>. Where are borrowed values?</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+fn display_frame (
+    renderer: &amp;mut Canvas&lt;Window&gt;,
+    canvas_width: &amp;i32,
+    canvas_height: &amp;i32,
+
+) {
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    renderer.clear();
+
+    let drawing_color = Color::RGB(red, green, blue);
+    renderer.set_draw_color(drawing_color);
+
+    let square_definition = Rect::new(0, 0, *canvas_width as u32, *canvas_height as u32);
+    let square = renderer.fill_rect(square_definition);
+    match square {
+        Ok(()) =&gt; {}
+        Err(error) =&gt; println!(&quot;{}&quot;, error),
+
+    renderer.present();
+}
+
+#}</code></pre></pre>
+<a class="header" href="#dereferencing" id="dereferencing"><h1>Dereferencing</h1></a>
+<p>Looking at the function from our game, we can now explain almost all the peculiar signs. One is missing.... try running your program without the <code>*</code>s.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+fn display_frame (
+    renderer: &amp;mut Canvas&lt;Window&gt;,
+    canvas_width: &amp;u32,
+    canvas_height: &amp;u32,
+
+) {
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    renderer.clear();
+
+    let drawing_color = Color::RGB(red, green, blue);
+    renderer.set_draw_color(drawing_color);
+
+    // let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
+    let square_definition = Rect::new(0, 0, canvas_width, canvas_height);
+    let square = renderer.fill_rect(square_definition);
+    match square {
+        Ok(()) =&gt; {}
+        Err(error) =&gt; println!(&quot;{}&quot;, error),
+
+    renderer.present();
+}
+
+#}</code></pre></pre>
+<p>A reference is a type of pointer. You can imagine it as an arrow to a value stored somewhere else.</p>
+<pre><pre class="playpen"><code class="language-rust editable">
+# #![allow(unused_variables)]
+#fn main() {
+let x = 5;
+let y = &amp;x;
+
+assert_eq!(5, x);
+assert_eq!(5, y);
+#}</code></pre></pre>
+<p>Execute this code.</p>
+<p><code>x</code> and <code>y</code> don't have the same value. <code>x</code> is an integer, and <code>y</code> is <code>&amp;x</code>, an arrow that points to that integer behind <code>x</code>. In order to get to the value <code>&amp;x</code> is pointing to, <code>y</code> needs to be dereferenced: <code>*y</code>.
+Change the code above and execute!</p>
+<a class="header" href="#animate" id="animate"><h1>Animate!</h1></a>
+<p>Call the function in <code>fn main()</code>, right before the thread goes to sleep. Enjoy!</p>
+<a class="header" href="#modularization" id="modularization"><h1>Modularization</h1></a>
+<a class="header" href="#creating-modules" id="creating-modules"><h2>Creating Modules</h2></a>
+<p>Since this project will be bigger then  a couple of lines of code, things will be more organised if we split it up into modules. To do this, make a new folder in inside the <code>src</code> folder, and call it <code>lib</code>. Inside <code>lib</code>, create <code>mod.rs</code> and <code>types.rs</code>.</p>
+<pre><code>.
+├── rusty snake
+│    ├── src
+│    │    ├── lib
+│    │    │    ├── mod.rs
+│    │    │    └── types.rs
+│    │    │
+│    │    └──  main.rs
+│    │    
+│    ├── Cargo.lock
+│    └── Cargo.toml
+└── ...
+</code></pre>
+<p>Move all functions you wrote to <code>mod.rs</code>. In order for this to work, all dependencies, these functions need, also need to be declared in <code>mod.rs</code>. If they are not used in <code>main.rs</code>, you can delete them there.</p>
+<a class="header" href="#making-functions-and-structs-public" id="making-functions-and-structs-public"><h2>Making Functions and structs Public</h2></a>
+<p>In order for a function to be accessible in <code>main.rs</code>, it needs to be marked with <code>pub</code>.</p>
+<a class="header" href="#accessing-the-modules-in-mainrs" id="accessing-the-modules-in-mainrs"><h2>Accessing the Modules in <code>main.rs</code></h2></a>
+<p>Before <code>fn main()</code> add the following line:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub mod lib
+#}</code></pre></pre>
+<p>Functions now have to be called in the namespace of the module:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let (canvas, mut events) = lib::init(canvas_width, canvas_height);
+
+#}</code></pre></pre>
+<a class="header" href="#the-grid" id="the-grid"><h1>The Grid</h1></a>
+<p>Now that we have set up the very basic framework for graphic output, we want to add some actual game elements.</p>
+<p>In the very basic version, the snake will be a square block, moving around in a grid. The food for the snake is a static square block of a different color. As the snake moves and eats the food by moving over it, the snake gets longer by one block. If the snake moves over its own parts, the game is over and restarts. If the snake moves out of the canvas, it reenters it on the other side.</p>
+<a class="header" href="#structs-and-vectors" id="structs-and-vectors"><h3>Structs and Vectors</h3></a>
+<p>Using structs, we will define our own data types for the grid and the cells. [Explain structs].</p>
+<ol>
+<li>The <code>Grid</code>-struct has one field named <code>grid</code>. The datatypes are vectors of <code>Cell</code>s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct Grid {
+    pub grid: Vec&lt;Vec&lt;Cell&gt;&gt;,
 }
 #}</code></pre></pre>
 <ol start="2">
-<li>Write your own struct for the Cell type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: u8.</li>
+<li>Write your own struct for the <code>Cell</code> type. This datatype is used to define the color of a cell, so it needs fields for each RGB-value. The data type of the RGB-values is an unsigned 8-bit integer: <code>u8</code>.</li>
 </ol>
 <p>Next, we need to initialize the grid.</p>
 <ol start="3">
-<li>Write function, use aids.</li>
+<li>Add this function to <code>mod.rs</code></li>
 </ol>
-<a class="header" href="#modularization" id="modularization"><h1>Modularization</h1></a>
-<a class="header" href="#displaying-grid" id="displaying-grid"><h1>Displaying Grid</h1></a>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn grid_init(nx_cells: u32, ny_cells: u32) -&gt; Grid {
+    let mut grid_vector = Vec::new();
+
+    for row in 0..ny_cells {
+        grid_vector.push(Vec::new());
+        for _column in 0..nx_cells {
+            grid_vector[row as usize].push(Cell {
+                red: 35_u8,
+                green: 15_u8,
+                blue: 13_u8,
+            });
+        }
+    }
+    let grid = Grid { grid: grid_vector };
+
+    grid
+}
+#}</code></pre></pre>
+<ol start="4">
+<li>Discuss in your group, what this function does, line by line.</li>
+<li>Add the following line before you spawn the thread.</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut grid = lib::grid_init(columns, rows);
+#}</code></pre></pre>
+<a class="header" href="#displaying-the-grid-in-frames" id="displaying-the-grid-in-frames"><h1>Displaying the grid in Frames</h1></a>
+<p>For each frame, the grid is drawn by displaying each single cell as a rectangle.</p>
+<p>In <code>fn main()</code>, right after we defined the variables for rows and columns, define a variable for <code>cell_width</code> and calculate its value.</p>
+<p><code>fn display_cell</code> converts row column values of a single Cell into x and y pixels and draws a rectangle in the specified color at the specified coordinate.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+pub fn display_cell(
+    renderer: &amp;mut Canvas&lt;Window&gt;,
+    row: u32,
+    col: u32,
+    grid_data: &amp;Grid,
+    cell_width: &amp;u32,
+) {
+    let cell_height = cell_width;
+
+    let grid = &amp;grid_data.grid;
+
+    let x = cell_width * col;
+    let y = cell_width * row;
+
+    //For now, we want random colors, to see what happens.
+    // let cell_color = &amp;grid[row as usize][col as usize];
+    // let drawing_color = Color::RGB(cell_color.red, cell_color.green, cell_color.blue);
+
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    let drawing_color = Color::RGB(red, green, blue);
+
+    renderer.set_draw_color(drawing_color);
+    let square = renderer.fill_rect(Rect::new(x, y, *cell_width, *cell_height));
+    match square {
+        Ok(()) =&gt; {}
+        Err(error) =&gt; println!(&quot;{}&quot;, error),
+    }
+}
+#}</code></pre></pre>
+<p><code>fn display_frame</code> displays the whole grid by repeatedly calling <code>fn display_cell</code> on every cell in the grid.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub fn display_frame(
+    renderer: &amp;mut Canvas&lt;Window&gt;,
+    grid: &amp;Grid,
+    nx_cells: &amp;u32,
+    ny_cells: &amp;u32,
+    cell_width: &amp;u32,
+) {
+
+
+    renderer.set_draw_color(Color::RGB(0, 0, 0));
+    renderer.clear();
+
+    for row in 0..*ny_cells {
+        for column in 0..*nx_cells {
+            display_cell(renderer, row, column, &amp;grid, &amp;cell_width)
+        }
+    }
+    renderer.present();
+}
+#}</code></pre></pre>
+<p>Add both of these functions to your program. Discuss, how the compare to <code>fn display_rectangle</code>. Then delete <code>fn display_rectangle</code>, as is not needed anymore.</p>
+<p>Substitute the line that calls <code>fn display_rectangle</code> with the following line:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+lib::display_frame(&amp;mut canvas, &amp;grid, &amp;columns, &amp;rows, &amp;cell_width);
+#}</code></pre></pre>
+<p>Run the program! Enjoy!</p>
+<a class="header" href="#adding-the-snake" id="adding-the-snake"><h1>Adding the snake</h1></a>
+<p>Well, maybe not a snake yet, but a square that moves according to your wishes! In this section, you can try to apply what you have learned so far. If you don't know how to continue, you can either ask for help, or look at one way of solving the problems on the next page.</p>
+<p>In the <code>lib</code> folder, make a new file called <code>snake.rs</code>.</p>
+<p>Write a function that initialises the snake as a <code>SnakeHead</code>. <code>SnakeHead</code> is a struct, that contains fields for a row, a column and a <code>Cell</code> value. The row and column values need to be <code>i32</code> instead of <code>u32</code>. Why?</p>
+<a class="header" href="#defining-a-tuple" id="defining-a-tuple"><h2>Defining a tuple</h2></a>
+<p>In <code>fn main()</code>, after the grid is initialized, we define a tuple for direction. <code>direction.0</code> is the row value, <code>direction.1</code> is the column value.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let mut direction = (1, 0);
+#}</code></pre></pre>
+<a class="header" href="#movement" id="movement"><h2>Movement</h2></a>
+<ol>
+<li>Write a function, that takes a mutable reference of the <code>SnakeHead</code>. It calculates a new position with <code>direction</code> values and the coordinates from <code>SnakeHead</code> and then returns a new <code>SnakeHead</code> with an updated position.</li>
+<li>Write a function, that takes ownership of the grid, changes the color of the square, where the current <code>SnakeHead</code> is located. The grid is then the return value.</li>
+</ol>
+<a class="header" href="#adding-user-input" id="adding-user-input"><h2>Adding User Input</h2></a>
+<ol>
+<li>Add Events for <code>up</code>, <code>down</code>, <code>left</code> and <code>right</code> key.</li>
+<li>How does the <code>direction.0</code> and the <code>direction.1</code> value change, when each of these buttons is pushed? Implement it!</li>
+</ol>
+<p>Run the game! Play the game!</p>
+<a class="header" href="#solution-for-the-snake" id="solution-for-the-snake"><h1>Solution for the Snake</h1></a>
 
                     </main>
 

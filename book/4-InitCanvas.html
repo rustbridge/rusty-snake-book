@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="Overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="Installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="Cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="InitCanvas.html" class="active"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="Debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="GridInit.html"><strong aria-hidden="true">8.</strong> Initializing Grid</a></li><li><a href="Modularization.html"><strong aria-hidden="true">9.</strong> Modularization</a></li><li><a href="GridDisplay.html"><strong aria-hidden="true">10.</strong> Displaying Grid</a></li></ol>
+            <ol class="chapter"><li><a href="1-overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="2-installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="3-cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="4-InitCanvas.html" class="active"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="5-InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="6-debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="7-UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="8-thread.html"><strong aria-hidden="true">8.</strong> Multithreading!</a></li><li><a href="9-frames.html"><strong aria-hidden="true">9.</strong> Animate!</a></li><li><a href="10-ResultType.html"><strong aria-hidden="true">10.</strong> Error Handling</a></li><li><a href="10-review.html"><strong aria-hidden="true">11.</strong> Review</a></li><li><a href="11-OwnershipBorrowing.html"><strong aria-hidden="true">12.</strong> Ownership and Borrowing</a></li><li><a href="12-dereferencing.html"><strong aria-hidden="true">13.</strong> Dereferencing</a></li><li><a href="13-animate.html"><strong aria-hidden="true">14.</strong> Animate!</a></li><li><a href="14-modularization.html"><strong aria-hidden="true">15.</strong> Modularization</a></li><li><a href="15-GridInit.html"><strong aria-hidden="true">16.</strong> Initializing the Grid</a></li><li><a href="16-frames.html"><strong aria-hidden="true">17.</strong> Displaying single cells</a></li><li><a href="17-snake.html"><strong aria-hidden="true">18.</strong> The Snake</a></li><li><a href="18-solution.html"><strong aria-hidden="true">19.</strong> Solution for the Snake</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -141,6 +141,7 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="#initializing-the-canvas" id="initializing-the-canvas"><h1>Initializing the Canvas</h1></a>
+<p>Our game needs a canvas, where all the games graphic is rendered. Let's initialize it.</p>
 <a class="header" href="#functions-and-variables" id="functions-and-variables"><h2>Functions and variables</h2></a>
 <p>Let's take a closer look at <code>fn init</code>.</p>
 <p><code>main.rs</code></p>
@@ -149,7 +150,7 @@
 
 #fn main() {
 // this function initializes the canvas
-fn init&lt;'a&gt;(width: i32, height: i32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
+fn init&lt;'a&gt;(width: u32, height: u32) -&gt; (Canvas&lt;Window&gt;, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
@@ -170,10 +171,10 @@ fn init&lt;'a&gt;(width: i32, height: i32) -&gt; (Canvas&lt;Window&gt;, EventPum
 }
 
 #}</code></pre></pre>
-<p><code>fn</code> declares the function, <code>init</code> is its name. <code>&lt;'a&gt;</code> indicates its lifetime. Lifetimes are unique to rust, declaring them is not needed for most functions, so we will just acknowledge its existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be indicated. In this example, the type of both parameters is <code>i32</code>, a 32bit integer. The return types also need to be specifically named. <code>fn init</code> returns two values in a bracket, separated by a comma. The types of these values are defined in the sdl2-crate. We'll ignore the body of the function for now.</p>
+<p><code>fn</code> declares the function, <code>init</code> is its name. <code>&lt;'a&gt;</code> indicates its lifetime. Lifetimes are unique to Rust, declaring them is not needed for most functions, so we will just acknowledge their existence, but ignore it for now. The function takes two parameters, x and y. Rust is a type safe language, so the types of the parameters need to be explicitly indicated. In this example, the type of both parameters is <code>u32</code>, a 32bit unsigned integer. The return types also need to be specifically named. <code>fn init</code> returns two values in a bracket, separated by a comma. The types of these values are defined in the <code>sdl2</code>-crate. We'll ignore the body of the function for now.</p>
 <ol>
 <li>In <code>main()</code>, delete the <code>println!</code> statement.</li>
-<li>Declare the variables <code>canvas_width</code> and <code>canvas_height</code>. [Values?]</li>
+<li>Declare the variables <code>canvas_width</code> and <code>canvas_height</code>, each with the value <code>720_u32</code>. <code>_32</code> makes this number explicitly an unsigned 32bit integer.</li>
 <li>Call the function by adding the following line:</li>
 </ol>
 <pre><pre class="playpen"><code class="language-rust">
@@ -190,13 +191,13 @@ let (canvas, events) = init(canvas_width, canvas_height);
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="Cargo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="3-cargo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="InitLoop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="5-InitLoop.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -208,13 +209,13 @@ let (canvas, events) = init(canvas_width, canvas_height);
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="Cargo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="3-cargo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="InitLoop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="5-InitLoop.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

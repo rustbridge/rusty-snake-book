@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Overview - Rusty Snake</title>
+        <title>Animate! - Rusty Snake</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="1-overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="2-installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="3-cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="4-InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="5-InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="6-debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="7-UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="8-thread.html"><strong aria-hidden="true">8.</strong> Multithreading!</a></li><li><a href="9-frames.html"><strong aria-hidden="true">9.</strong> Animate!</a></li><li><a href="10-ResultType.html"><strong aria-hidden="true">10.</strong> Error Handling</a></li><li><a href="10-review.html"><strong aria-hidden="true">11.</strong> Review</a></li><li><a href="11-OwnershipBorrowing.html"><strong aria-hidden="true">12.</strong> Ownership and Borrowing</a></li><li><a href="12-dereferencing.html"><strong aria-hidden="true">13.</strong> Dereferencing</a></li><li><a href="13-animate.html"><strong aria-hidden="true">14.</strong> Animate!</a></li><li><a href="14-modularization.html"><strong aria-hidden="true">15.</strong> Modularization</a></li><li><a href="15-GridInit.html"><strong aria-hidden="true">16.</strong> Initializing the Grid</a></li><li><a href="16-frames.html"><strong aria-hidden="true">17.</strong> Displaying single cells</a></li><li><a href="17-snake.html"><strong aria-hidden="true">18.</strong> The Snake</a></li><li><a href="18-solution.html"><strong aria-hidden="true">19.</strong> Solution for the Snake</a></li></ol>
+            <ol class="chapter"><li><a href="1-overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="2-installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="3-cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="4-InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="5-InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="6-debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="7-UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="8-thread.html"><strong aria-hidden="true">8.</strong> Multithreading!</a></li><li><a href="9-frames.html" class="active"><strong aria-hidden="true">9.</strong> Animate!</a></li><li><a href="10-ResultType.html"><strong aria-hidden="true">10.</strong> Error Handling</a></li><li><a href="10-review.html"><strong aria-hidden="true">11.</strong> Review</a></li><li><a href="11-OwnershipBorrowing.html"><strong aria-hidden="true">12.</strong> Ownership and Borrowing</a></li><li><a href="12-dereferencing.html"><strong aria-hidden="true">13.</strong> Dereferencing</a></li><li><a href="13-animate.html"><strong aria-hidden="true">14.</strong> Animate!</a></li><li><a href="14-modularization.html"><strong aria-hidden="true">15.</strong> Modularization</a></li><li><a href="15-GridInit.html"><strong aria-hidden="true">16.</strong> Initializing the Grid</a></li><li><a href="16-frames.html"><strong aria-hidden="true">17.</strong> Displaying single cells</a></li><li><a href="17-snake.html"><strong aria-hidden="true">18.</strong> The Snake</a></li><li><a href="18-solution.html"><strong aria-hidden="true">19.</strong> Solution for the Snake</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -140,15 +140,68 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#learning-rust-by-coding-a-game-of-snake" id="learning-rust-by-coding-a-game-of-snake"><h1>Learning Rust by Coding a Game of Snake</h1></a>
-<p>In this tutorial you will write a very simple game engine for a snake game, while learning the basics of Rust. You can also use and adapt the game engine to write any other old school pixely 2D game.</p>
+                        <a class="header" href="#frames" id="frames"><h1>Frames.</h1></a>
+<p>Each animation step is displayed in a new frame. We will now draw a rectangle of the size of the canvas, with a different random color.</p>
+<p><code>sdl</code> offers methods to draw basic shapes, like rectangles, this needs to be imported. It also offers methods that convert our u8 values into RGB colors, that can be displayed.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use sdl2::rect::Rect;
+use sdl2::pixels::Color;
+
+use rand;
+
+#}</code></pre></pre>
+<p>Add the following function to your program.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+fn display_rectangle (
+    renderer: &amp;mut Canvas&lt;Window&gt;,
+    canvas_width: &amp;u32,
+    canvas_height: &amp;u32,
+
+) {
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    renderer.clear();
+
+    let drawing_color = Color::RGB(red, green, blue);
+    renderer.set_draw_color(drawing_color);
+
+    let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
+    renderer.fill_rect(square_definition);
+
+    renderer.present();
+}
+
+#}</code></pre></pre>
+<p>The function takes the canvas, as well as the canvas width and height as arguments. It does not return a value. In the body of the function, the variables red, green and blue are assigned random <code>u8</code> numbers.
+The <code>clear()</code> method is called on the renderer, this clears the canvas. When, like in our case, the entire canvas is drawn over, this does not really matter, but it's a good habit, to think of this.
+Then, the drawing color is defined. We use a function that is provided by <code>sdl2</code>, the function takes in three <code>u8</code> values and returns a color.
+The method <code>set_draw_color()</code> is called on the renderer, with <code>drawing_color</code> as argument.</p>
+<p>We create a new rectangle with it's minimum and maximum x and y values as arguments and bind it to the variable <code>square_definition</code>. This variable is then passed to the method <code>fill_rect()</code>. Our square is rendered and put into the back buffer.</p>
+<p>The last line updates the screen with all the rendering done since the last update.</p>
+<p>Do you notice anything peculiar about some of the type declarations in this function?</p>
+<p>Run the program.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="8-thread.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="10-ResultType.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -158,7 +211,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a href="8-thread.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a href="10-ResultType.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 

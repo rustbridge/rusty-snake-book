@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Debugging - Rusty Snake</title>
+        <title>Multithreading! - Rusty Snake</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +75,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="Overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="Installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="Cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="Debugging.html" class="active"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="GridInit.html"><strong aria-hidden="true">8.</strong> Initializing Grid</a></li><li><a href="Modularization.html"><strong aria-hidden="true">9.</strong> Modularization</a></li><li><a href="GridDisplay.html"><strong aria-hidden="true">10.</strong> Displaying Grid</a></li></ol>
+            <ol class="chapter"><li><a href="1-overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li><a href="2-installation.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li><a href="3-cargo.html"><strong aria-hidden="true">3.</strong> Cargo and Dependencies</a></li><li><a href="4-InitCanvas.html"><strong aria-hidden="true">4.</strong> Initializing the Canvas</a></li><li><a href="5-InitLoop.html"><strong aria-hidden="true">5.</strong> Initializing the Graphic Loop</a></li><li><a href="6-debugging.html"><strong aria-hidden="true">6.</strong> Debugging</a></li><li><a href="7-UserInput.html"><strong aria-hidden="true">7.</strong> User Input</a></li><li><a href="8-thread.html" class="active"><strong aria-hidden="true">8.</strong> Multithreading!</a></li><li><a href="9-frames.html"><strong aria-hidden="true">9.</strong> Animate!</a></li><li><a href="10-ResultType.html"><strong aria-hidden="true">10.</strong> Error Handling</a></li><li><a href="10-review.html"><strong aria-hidden="true">11.</strong> Review</a></li><li><a href="11-OwnershipBorrowing.html"><strong aria-hidden="true">12.</strong> Ownership and Borrowing</a></li><li><a href="12-dereferencing.html"><strong aria-hidden="true">13.</strong> Dereferencing</a></li><li><a href="13-animate.html"><strong aria-hidden="true">14.</strong> Animate!</a></li><li><a href="14-modularization.html"><strong aria-hidden="true">15.</strong> Modularization</a></li><li><a href="15-GridInit.html"><strong aria-hidden="true">16.</strong> Initializing the Grid</a></li><li><a href="16-frames.html"><strong aria-hidden="true">17.</strong> Displaying single cells</a></li><li><a href="17-snake.html"><strong aria-hidden="true">18.</strong> The Snake</a></li><li><a href="18-solution.html"><strong aria-hidden="true">19.</strong> Solution for the Snake</a></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -140,44 +140,36 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#debugging" id="debugging"><h1>Debugging</h1></a>
-<a class="header" href="#iterators" id="iterators"><h2>Iterators</h2></a>
-<p>One of Rusts features are the ErrorMessages that acutally help. From the error message we learn, that the type of <code>events</code> is called <code>EventPump</code>, and where in <code>sdl2</code> it is defined. On order to be able to iterate over a type, it has to implement the <code>Iterator</code> trait, and apparently, <code>EventPump</code> does not. To fix this, we consult the documentation. Besides looking it up on the internet, using the command <code>cargo doc --open</code> is an elegant way of getting the documentation for all the crates in your project locally and open in a browser window.</p>
-<p>In the <code>sdl2</code> crate, go to EventPump. Look at the Implementation sections for this type. Can you find the <code>Iterator</code> trait? On the same page, look for a function, that returns an Iterator. On the page of the return type, check, if the <code>Iterator</code> trait is implemented.</p>
-<ol>
-<li>Call the function on events.</li>
-<li>To make things easier for later, we will give this loop the name <code>'game</code>.</li>
-</ol>
-<p>It should look like this:</p>
+                        <a class="header" href="#multithreading" id="multithreading"><h1>Multithreading</h1></a>
+<p>Rust is famous for its safe and easy way to write multithreaded programs. We don't need this program to be multithreaded yet, but it comes with a handy sleep mode, that we need.</p>
+<p>To spawn a thread, add these lines before <code>'game</code>:</p>
 <pre><pre class="playpen"><code class="language-rust">
 # #![allow(unused_variables)]
 #fn main() {
-'game: loop {
-      for event in events.poll_iter() {
-          // handle user input here
-      }
+thread::spawn(move || {
+    // some work here
+    });
 #}</code></pre></pre>
-<ol start="3">
-<li>Run the program. From the output on your screen, do you know what to do?</li>
-</ol>
-<a class="header" href="#mutability" id="mutability"><h2>Mutability</h2></a>
-<p>[explain Mutability and why iterators must be mutable.]</p>
-<ol start="4">
-<li>Run the program. Close the window.</li>
-</ol>
+<p>Inside, at the end of <code>'game</code>, add this line:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+thread::sleep(time::Duration::from_millis(800));
+#}</code></pre></pre>
+<p><code>'game</code> will now sleep 800 milliseconds, before starting over.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="InitLoop.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="7-UserInput.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="UserInput.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="9-frames.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -189,13 +181,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="InitLoop.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="7-UserInput.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="UserInput.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a href="9-frames.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
