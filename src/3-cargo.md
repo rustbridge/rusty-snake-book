@@ -45,7 +45,7 @@ Substitute the content of the file with the following code:
 
 
 // this function initializes the canvas
-fn init<'a>(x: u32, y: u32) -> (Canvas<Window>, EventPump) {
+fn init(x: u32, y: u32) -> (Canvas<Window>, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 

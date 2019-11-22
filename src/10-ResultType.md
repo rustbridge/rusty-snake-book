@@ -4,38 +4,4 @@
 
 2. Change the code.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```rust
-let square = renderer.fill_rect(square_definition);
-match square {
-    Ok(()) => {}
-    Err(error) => println!("{}", error),
-}
-```
+Find the solution on the next page.

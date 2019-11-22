@@ -4,7 +4,7 @@ Looking at the function from our game, we can now explain almost all the peculia
 
 ```rust
 
-fn display_frame (
+fn display_rectangle (
     renderer: &mut Canvas<Window>,
     canvas_width: &u32,
     canvas_height: &u32,
