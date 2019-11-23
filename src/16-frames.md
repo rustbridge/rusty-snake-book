@@ -4,11 +4,9 @@ For each frame, the grid is drawn by displaying each single cell as a rectangle.
 
 In `fn main()`, right after we defined the variables for rows and columns, define a variable for `cell_width` and calculate its value.
 
-
 `fn display_cell` converts row column values of a single Cell into x and y pixels and draws a rectangle in the specified color at the specified coordinate.
 
 ```rust
-
 pub fn display_cell(
     renderer: &mut Canvas<Window>,
     row: u32,
@@ -65,6 +63,7 @@ pub fn display_frame(
     renderer.present();
 }
 ```
+
 Add both of these functions to your program. Discuss, how the compare to `fn display_rectangle`. Then delete `fn display_rectangle`, as is not needed anymore.
 
 Substitute the line that calls `fn display_rectangle` with the following line:
@@ -72,4 +71,5 @@ Substitute the line that calls `fn display_rectangle` with the following line:
 ```rust
 lib::display_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
 ```
+
 Run the program! Enjoy!
