@@ -65,8 +65,8 @@ Take another look at `fn display_frame`. Where are borrowed values?
 
 fn display_frame (
     renderer: &mut Canvas<Window>,
-    canvas_width: &i32,
-    canvas_height: &i32,
+    canvas_width: &u32,
+    canvas_height: &u32,
 ) {
     let red: u8 = rand::random();
     let green: u8 = rand::random();
@@ -77,7 +77,7 @@ fn display_frame (
     let drawing_color = Color::RGB(red, green, blue);
     renderer.set_draw_color(drawing_color);
 
-    let square_definition = Rect::new(0, 0, *canvas_width as u32, *canvas_height as u32);
+    let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
     let square = renderer.fill_rect(square_definition);
     match square {
         Ok(()) => {}
