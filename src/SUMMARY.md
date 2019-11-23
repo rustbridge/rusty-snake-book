@@ -14,7 +14,6 @@
 - [Review](./10-review.md)
 - [Ownership and Borrowing](./11-OwnershipBorrowing.md)
 - [Dereferencing](./12-dereferencing.md)
-- [Animate!](./13-animate.md)
 - [Modularization](./14-modularization.md)
 - [Initializing the Grid](./15-GridInit.md)
 - [Displaying single cells](./16-frames.md)
