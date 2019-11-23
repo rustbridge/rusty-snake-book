@@ -12,7 +12,7 @@ fn main() {
 
     takes_ownership(s);
 
-    //println!("{}", s)           
+    //println!("{}", s);
 
 }
 //println!("{}", s)
@@ -31,7 +31,7 @@ fn main() {
 
     borrows_value(&s);
 
-    println!("{}", s)           
+    println!("{}", s);
 
 }
 
