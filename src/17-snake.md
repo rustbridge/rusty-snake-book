@@ -10,7 +10,9 @@ Well, maybe not a snake yet, but a square that moves according to your wishes! I
    use crate::lib::types::{Cell, SnakeHead, Grid};
    ```
 
-3. Write a function that initialises the snake as a `SnakeHead`. `SnakeHead` is a struct, that contains fields for a row, a column and a `Cell` value. The row and column values need to be `i32` instead of `u32`. Why?
+3. Add `pub mod snake;` right below the existing `pub mod types;`.
+
+4. Write a function that initialises the snake as a `SnakeHead`. `SnakeHead` is a struct, that contains fields for a row, a column and a `Cell` value. The row and column values need to be `i32` instead of `u32`. Why?
 
 ## Defining a tuple
 
