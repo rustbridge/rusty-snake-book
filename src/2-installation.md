@@ -27,6 +27,9 @@ brew install sdl2
 ```shell
 sudo apt-get install libsdl2-dev
 ```
+### Windows
+
+Follow the instructions [here](https://github.com/Rust-SDL2/rust-sdl2#windows-msvc), following the steps "For Rustup users".
 
 ### Other Operating Systems
 
