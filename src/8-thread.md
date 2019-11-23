@@ -14,7 +14,7 @@ To spawn a thread, add these lines before `'game`:
 ```rust
 thread::spawn(move || {
     // some work here
-    });
+});
 ```
 Inside, at the end of `'game`, add this line:
 

@@ -13,9 +13,10 @@ It should look like this:
 
 ```rust
 'game: loop {
-      for event in events.poll_iter() {
-          // handle user input here
-      }
+    for event in events.poll_iter() {
+        // handle user input here
+    }
+}
 ```
 
 3. Run the program. From the output on your screen, do you know what to do?

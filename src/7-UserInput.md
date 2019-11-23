@@ -18,30 +18,26 @@ use sdl2::keyboard::Keycode;
 2. Enter the following lines into the `for` loop. `match` compares the value of the `event`-variable to the variants of the enum `Event`. If the value of the `event`-variable is a pressed `esc`-key, the `'game`-loop breaks. If value is something else, the loop continues. The last part of a `match` always needs to be `_ =>`, the case that covers all cases that are not explicitly defined.
 
 ```rust
-
 match event {
-        Event::KeyDown {
-              keycode: Some(Keycode::Escape),
-              ..
-          } => break 'game,
-
-          _ => continue 'game,
-      }
+    Event::KeyDown {
+        keycode: Some(Keycode::Escape),
+        ..
+    } => break 'game,
+    _ => continue 'game,
+}
 ```
 
 3. Run the program, try if the user input you implemented works!
 4. To be able to close the window with a mouse click, change the first line of the `match` to include `Event::Quit { .. }`. The `'game` -loop breaks now if either the `esc`-key is pressed, or the quit-button is clicked with the curser.
 
 ```rust
-
 match event {
-    Event::Quit { .. }
-    | Event::KeyDown {
+    Event::Quit {
+        ..
+    } | Event::KeyDown {
         keycode: Some(Keycode::Escape),
         ..
     } => break 'game,
-
     _ => continue 'game,
 }
-
 ```
