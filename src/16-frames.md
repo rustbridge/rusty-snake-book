@@ -64,9 +64,9 @@ pub fn display_frame(
 }
 ```
 
-Add both of these functions to your program. Discuss, how the compare to `fn display_rectangle`. Then delete `fn display_rectangle`, as is not needed anymore.
+Add both of these functions to your program. Discuss, how the compare to `fn display_frame`. Then delete `fn display_frame`, as is not needed anymore.
 
-Substitute the line that calls `fn display_rectangle` with the following line:
+Substitute the line that calls `fn display_frame` with the following line:
 
 ```rust
 lib::display_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
