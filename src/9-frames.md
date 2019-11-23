@@ -22,7 +22,7 @@ Add the following function to your program.
 
 ```rust
 
-fn display_rectangle (
+fn draw_rectangle (
     renderer: &mut Canvas<Window>,
     canvas_width: &u32,
     canvas_height: &u32,

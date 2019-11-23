@@ -3,7 +3,7 @@
 Looking at the function from our game, we can now explain almost all the peculiar signs. One is missing... try running your program without the `*`s.
 
 ```rust
-fn display_rectangle (
+fn draw_rectangle (
     renderer: &mut Canvas<Window>,
     canvas_width: &u32,
     canvas_height: &u32,
