@@ -22,11 +22,10 @@ Add the following function to your program.
 
 ```rust
 
-fn display_rectangle (
+fn display_frame (
     renderer: &mut Canvas<Window>,
     canvas_width: &u32,
     canvas_height: &u32,
-
 ) {
     let red: u8 = rand::random();
     let green: u8 = rand::random();
