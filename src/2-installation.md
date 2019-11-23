@@ -16,6 +16,12 @@ Windows Users may need to install additional tools. Please refer to the [followi
 
 Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D. It is written in C, and we will only use Rust bindings later on, you need to install the C library separately.
 
+## MacOS
+
+```shell
+brew install sdl2
+```
+
 ## Ubuntu
 
 ```shell
@@ -24,4 +30,4 @@ sudo apt-get install libsdl2-dev
 
 ## Other Operating Systems
 
-[Download](https://www.libsdl.org/download-2.0.php) and install the development library according to your system. 
+[Download](https://www.libsdl.org/download-2.0.php) and install the development library according to your system.
