@@ -6,11 +6,18 @@ Each animation step is displayed in a new frame. We will now draw a rectangle of
 
 ```rust
 use sdl2::rect::Rect;
-use sdl2::pixels::Color;
-
 use rand;
 
 ```
+
+`rand` is another library we are using. To activate it, add it to your `Cargo.toml` as a dependency. It should now look like this:
+
+```
+[dependencies]
+sdl2 = "0.30.0"
+rand = "0.7"
+```
+
 Add the following function to your program.
 
 ```rust
@@ -48,5 +55,7 @@ We create a new rectangle with it's minimum and maximum x and y values as argume
 The last line updates the screen with all the rendering done since the last update.
 
 Do you notice anything peculiar about some of the type declarations in this function?
+
+Try calling this function for every `'game` loop iteration in your main program.
 
 Run the program.
