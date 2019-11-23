@@ -67,7 +67,6 @@ fn display_frame (
     renderer: &mut Canvas<Window>,
     canvas_width: &i32,
     canvas_height: &i32,
-
 ) {
     let red: u8 = rand::random();
     let green: u8 = rand::random();
