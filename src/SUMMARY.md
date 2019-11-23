@@ -10,7 +10,7 @@
 - [Multithreading!](./8-thread.md)
 - [Animation Frames](./9-frames.md)
 - [Error Handling](./10-ResultType.md)
-- [Solution for Using the Result Type](.11-SolutionUsingResultType.md)
+- [Solution for Using the Result Type](.11-SolutionUsingResult.md)
 - [Review](./10-review.md)
 - [Ownership and Borrowing](./11-OwnershipBorrowing.md)
 - [Dereferencing](./12-dereferencing.md)
