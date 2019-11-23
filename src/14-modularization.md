@@ -34,7 +34,7 @@ In order for a function to be accessible in `main.rs`, it needs to be marked wit
 Before `fn main()` add the following line:
 
 ```rust
-pub mod lib
+pub mod lib;
 ```
 
 Functions now have to be called in the namespace of the module:
