@@ -59,11 +59,11 @@ But there are two restrictions:
 * There can only be one mutable reference to a value!
 * A value can not be borrowed mutable and immutable!
 
-Take another look at `fn display_frame`. Where are borrowed values?
+Take another look at `fn draw_frame`. Where are borrowed values?
 
 ```rust
 
-fn display_frame (
+fn draw_frame (
     renderer: &mut Canvas<Window>,
     canvas_width: &i32,
     canvas_height: &i32,

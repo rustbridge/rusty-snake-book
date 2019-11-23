@@ -106,5 +106,5 @@ for event in events.poll_iter() {
 
 snake = snake::snake_moves(&mut snake, direction);
 grid = snake::draw_grid_with_snake(grid, &snake);
-lib::display_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
+lib::draw_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
 ```
