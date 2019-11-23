@@ -8,9 +8,7 @@ $ cargo new rusty_snake
 
 Cargo generated a new new folder called `rusty_snake`. `cd` into the directory to check out what cargo generated.
 
-
 Open the file `cargo.toml` in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.
-
 
 It should look like this:
 
@@ -27,8 +25,8 @@ edition = "2018"
 
 [dependencies]
 
-
 ```
+
 To use SDL2 in rust, we need to add the sdl2 crate as dependency.
 
 Add the following line in the [dependencies] section:
@@ -69,7 +67,6 @@ fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
 fn main() {
     println!("Hello, world!");
 }
-
 ```
 
 Right in the beginning of the File, in the section `// Dependencies go here`, add the following lines:

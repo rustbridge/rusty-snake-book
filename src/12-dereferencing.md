@@ -1,9 +1,8 @@
 # Dereferencing
 
-Looking at the function from our game, we can now explain almost all the peculiar signs. One is missing.... try running your program without the `*`s.
+Looking at the function from our game, we can now explain almost all the peculiar signs. One is missing... try running your program without the `*`s.
 
 ```rust
-
 fn display_rectangle (
     renderer: &mut Canvas<Window>,
     canvas_width: &u32,
@@ -28,7 +27,6 @@ fn display_rectangle (
 
     renderer.present();
 }
-
 ```
 
 A reference is a type of pointer. You can imagine it as an arrow to a value stored somewhere else.
@@ -40,6 +38,7 @@ let y = &x;
 assert_eq!(5, x);
 assert_eq!(5, y);
 ```
+
 Execute this code.
 
 `x` and `y` don't have the same value. `x` is an integer, and `y` is `&x`, an arrow that points to that integer behind `x`. In order to get to the value `&x` is pointing to, `y` needs to be dereferenced: `*y`.

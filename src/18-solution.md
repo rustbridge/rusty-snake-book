@@ -1,5 +1,7 @@
 # Solution for the Snake
+
 `snake.rs`
+
 ```rust
 use crate::lib::types::{Cell, SnakeHead, Grid};
 

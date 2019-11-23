@@ -8,4 +8,5 @@ We have initialized the canvas, but in order for the program to run continuously
 1. After the last line inside `fn main()` add a `loop {}`.
 
 2. Inside this `loop`, iterate over `event` in `events.poll_iter()` with a `for` loop.
+
 3. Run the program. In your group, read and discuss the output on the screen. What information does it provide?
