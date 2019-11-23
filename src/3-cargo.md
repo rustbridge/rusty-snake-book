@@ -45,12 +45,12 @@ Substitute the content of the file with the following code:
 
 
 // this function initializes the canvas
-fn init(x: u32, y: u32) -> (Canvas<Window>, EventPump) {
+fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
     let window = video_subsystem
-        .window("Game", x + 1, y + 1)
+        .window("Game", width + 1, height + 1)
         .position_centered()
         .build()
         .unwrap();
