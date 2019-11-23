@@ -23,7 +23,7 @@ Add the following function to your program.
 ```rust
 
 fn display_rectangle (
-    renderer: &mut Canvas<Window>,
+    canvas: &mut Canvas<Window>,
     canvas_width: &u32,
     canvas_height: &u32,
 
@@ -32,23 +32,23 @@ fn display_rectangle (
     let green: u8 = rand::random();
     let blue: u8 = rand::random();
 
-    renderer.clear();
+    canvas.clear();
 
     let drawing_color = Color::RGB(red, green, blue);
-    renderer.set_draw_color(drawing_color);
+    canvas.set_draw_color(drawing_color);
 
     let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
-    renderer.fill_rect(square_definition);
+    canvas.fill_rect(square_definition);
 
-    renderer.present();
+    canvas.present();
 }
 
 ```
 
 The function takes the canvas, as well as the canvas width and height as arguments. It does not return a value. In the body of the function, the variables red, green and blue are assigned random `u8` numbers.
-The `clear()` method is called on the renderer, this clears the canvas. When, like in our case, the entire canvas is drawn over, this does not really matter, but it's a good habit, to think of this.
+The `clear()` method is called on the canvas, this clears the canvas. When, like in our case, the entire canvas is drawn over, this does not really matter, but it's a good habit, to think of this.
 Then, the drawing color is defined. We use a function that is provided by `sdl2`, the function takes in three `u8` values and returns a color.
-The method `set_draw_color()` is called on the renderer, with `drawing_color` as argument.
+The method `set_draw_color()` is called on the canvas, with `drawing_color` as argument.
 
 We create a new rectangle with it's minimum and maximum x and y values as arguments and bind it to the variable `square_definition`. This variable is then passed to the method `fill_rect()`. Our square is rendered and put into the back buffer.
 

@@ -64,26 +64,25 @@ Take another look at `fn display_frame`. Where are borrowed values?
 ```rust
 
 fn display_frame (
-    renderer: &mut Canvas<Window>,
+    canvas: &mut Canvas<Window>,
     canvas_width: &i32,
     canvas_height: &i32,
-
 ) {
     let red: u8 = rand::random();
     let green: u8 = rand::random();
     let blue: u8 = rand::random();
 
-    renderer.clear();
+    canvas.clear();
 
     let drawing_color = Color::RGB(red, green, blue);
-    renderer.set_draw_color(drawing_color);
+    canvas.set_draw_color(drawing_color);
 
     let square_definition = Rect::new(0, 0, *canvas_width as u32, *canvas_height as u32);
-    let square = renderer.fill_rect(square_definition);
+    let square = canvas.fill_rect(square_definition);
     match square {
         Ok(()) => {}
         Err(error) => println!("{}", error),
     }
-    renderer.present();
+    canvas.present();
 }
 ```

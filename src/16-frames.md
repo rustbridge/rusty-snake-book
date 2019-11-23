@@ -8,7 +8,7 @@ In `fn main()`, right after we defined the variables for rows and columns, defin
 
 ```rust
 pub fn display_cell(
-    renderer: &mut Canvas<Window>,
+    canvas: &mut Canvas<Window>,
     row: u32,
     col: u32,
     grid_data: &Grid,
@@ -31,8 +31,8 @@ pub fn display_cell(
 
     let drawing_color = Color::RGB(red, green, blue);
 
-    renderer.set_draw_color(drawing_color);
-    let square = renderer.fill_rect(Rect::new(x, y, *cell_width, *cell_height));
+    canvas.set_draw_color(drawing_color);
+    let square = canvas.fill_rect(Rect::new(x, y, *cell_width, *cell_height));
     match square {
         Ok(()) => {}
         Err(error) => println!("{}", error),
@@ -44,7 +44,7 @@ pub fn display_cell(
 
 ```rust
 pub fn display_frame(
-    renderer: &mut Canvas<Window>,
+    canvas: &mut Canvas<Window>,
     grid: &Grid,
     nx_cells: &u32,
     ny_cells: &u32,
@@ -52,15 +52,15 @@ pub fn display_frame(
 ) {
 
 
-    renderer.set_draw_color(Color::RGB(0, 0, 0));
-    renderer.clear();
+    canvas.set_draw_color(Color::RGB(0, 0, 0));
+    canvas.clear();
 
     for row in 0..*ny_cells {
         for column in 0..*nx_cells {
-            display_cell(renderer, row, column, &grid, &cell_width)
+            display_cell(canvas, row, column, &grid, &cell_width)
         }
     }
-    renderer.present();
+    canvas.present();
 }
 ```
 
