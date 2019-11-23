@@ -4,7 +4,7 @@ Looking at the function from our game, we can now explain almost all the peculia
 
 ```rust
 fn display_rectangle (
-    renderer: &mut Canvas<Window>,
+    canvas: &mut Canvas<Window>,
     canvas_width: &u32,
     canvas_height: &u32,
 
@@ -13,19 +13,19 @@ fn display_rectangle (
     let green: u8 = rand::random();
     let blue: u8 = rand::random();
 
-    renderer.clear();
+    canvas.clear();
 
     let drawing_color = Color::RGB(red, green, blue);
-    renderer.set_draw_color(drawing_color);
+    canvas.set_draw_color(drawing_color);
 
     // let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
     let square_definition = Rect::new(0, 0, canvas_width, canvas_height);
-    let square = renderer.fill_rect(square_definition);
+    let square = canvas.fill_rect(square_definition);
     match square {
         Ok(()) => {}
         Err(error) => println!("{}", error),
 
-    renderer.present();
+    canvas.present();
 }
 ```
 
