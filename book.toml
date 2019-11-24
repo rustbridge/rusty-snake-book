@@ -3,3 +3,4 @@ authors = ["Mirabellensaft"]
 multilingual = false
 src = "src"
 title = "Rusty Snake"
+editable = "true"
