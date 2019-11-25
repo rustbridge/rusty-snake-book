@@ -8,14 +8,14 @@ We're finally getting to something that is very exclusively Rusty: Ownership, re
 ```rust, editable
 fn main() {
     let s = String::from("hello");  
-    //println!("{}", s)
+    //println!("{}", s);
 
     takes_ownership(s);
 
     //println!("{}", s);
 
 }
-//println!("{}", s)
+//println!("{}", s);
 
 fn takes_ownership(some_string: String) {
     println!("{}", some_string);
