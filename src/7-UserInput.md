@@ -1,43 +1,22 @@
 # Handling User Input
 
-## enums and match
+Any game needs to process the user's input in some form. Let's work on that next.
 
-Yeah, it's kind of hard to close the window. The reason for this is, that we have not told our program how to deal with events, so it continues to run and we have to force it to quit. That's uncomfortable, let's change that.
+In ggez, there's a number of optional methods for input handling defined on the [`EventHandler`]
+trait. While we've implemented that trait already, these methods are missing from our `impl`. That's
+fine, since the trait provides default implementations of them that simply do nothing.
 
-Go to the `sdl2` documentation. Go to the `event` module, find the `Event` `enum`. An `enum` in Rust is a type that represents data that is one of several possible variants. Each variant in the `enum` can optionally have data associated with it. Look at the possible `event` variants in the declaration of `Event`. We want to end the program by pushing `esc`. What variant are we looking for?
+1. Implement the `key_down_event` method. Use `println!("{:?}", keycode);` to print the pressed key
+   to the console.
 
-In our game loop, we iterate over `events`. Depending on what kind of `event` is happening, we want the program to react in different ways. Pushing `space` means something different, then pushing `esc`. We will `match` the `event` to the variants of the enum `Event`. `match` is a way to control the the flow of the program, when there are several possible options, similar to `if` `else` statements.
+<!-- Assumes `enum` and `match` already explained in the intro -->
+2. The `keycode` argument is of type [`KeyCode`], which is an `enum`. Check its documentation to
+   find out which variants we can work with. `match` on the key code and handle the 4 arrow keys.
+   Print a unique string for each arrow key.
 
-1. To be able to use the enum and work with keyboard input, we need to add the following dependencies:
+3. Extend the `match` to also handle the escape key. Make the escape key exit the game by calling
+   [`ggez::event::quit`].
 
-```rust
-use sdl2::event::Event;
-use sdl2::keyboard::Keycode;
-```
-
-2. Enter the following lines into the `for` loop. `match` compares the value of the `event`-variable to the variants of the enum `Event`. If the value of the `event`-variable is a pressed `esc`-key, the `'game`-loop breaks. If value is something else, the loop continues. The last part of a `match` always needs to be `_ =>`, the case that covers all cases that are not explicitly defined.
-
-```rust
-match event {
-    Event::KeyDown {
-        keycode: Some(Keycode::Escape),
-        ..
-    } => break 'game,
-    _ => continue 'game,
-}
-```
-
-3. Run the program, try if the user input you implemented works!
-4. To be able to close the window with a mouse click, change the first line of the `match` to include `Event::Quit { .. }`. The `'game` -loop breaks now if either the `esc`-key is pressed, or the quit-button is clicked with the curser.
-
-```rust
-match event {
-    Event::Quit {
-        ..
-    } | Event::KeyDown {
-        keycode: Some(Keycode::Escape),
-        ..
-    } => break 'game,
-    _ => continue 'game,
-}
-```
+[`EventHandler`]: https://docs.rs/ggez/0.5.1/ggez/event/trait.EventHandler.html
+[`KeyCode`]: https://docs.rs/ggez/0.5.1/ggez/input/keyboard/enum.KeyCode.html
+[`ggez::event::quit`]: https://docs.rs/ggez/0.5.1/ggez/event/fn.quit.html

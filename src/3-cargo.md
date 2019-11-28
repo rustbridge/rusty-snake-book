@@ -6,13 +6,13 @@ To initialize a new project, run `cargo new`:
 $ cargo new rusty_snake
 ```
 
-Cargo generated a new new folder called `rusty_snake`. `cd` into the directory to check out what cargo generated.
+Cargo generated a new folder called `rusty_snake`. `cd` into the directory to check out what Cargo generated.
 
-Open the file `cargo.toml` in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.
+Open the file `Cargo.toml` in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.
 
 It should look like this:
 
-`cargo.toml`
+`Cargo.toml`
 
 ```rust
 [package]
@@ -24,13 +24,15 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
 ```
 
-To use SDL2 in rust, we need to add the sdl2 crate as dependency.
+We will be using the [ggez](https://ggez.rs/) game library, so we'll need to add it as a dependency.
 
-Add the following line in the [dependencies] section:
-`sdl2 = "0.30.0"`
+To do that, add the following line in the `[dependencies]` section:
+
+```toml
+ggez = "0.5.1"
+```
 
 open `src/main.rs`
 
@@ -43,24 +45,11 @@ Substitute the content of the file with the following code:
 
 
 // this function initializes the canvas
-fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
-    let sdl_context = sdl2::init().unwrap();
-    let video_subsystem = sdl_context.video().unwrap();
-
-    let window = video_subsystem
-        .window("Game", width + 1, height + 1)
-        .position_centered()
+fn init(width: f32, height: f32) -> (Context, EventsLoop) {
+    ContextBuilder::new("Snake", "<your name here>")
+        .window_mode(WindowMode::default().dimensions(width, height))
         .build()
-        .unwrap();
-
-    let mut canvas = window.into_canvas().present_vsync().build().unwrap();
-
-    canvas.set_draw_color(Color::RGB(0, 0, 0));
-    canvas.clear();
-    canvas.present();
-
-    let event_pump = sdl_context.event_pump().unwrap();
-    (canvas, event_pump)
+        .unwrap()
 }
 
 // this is main
@@ -72,10 +61,11 @@ fn main() {
 Right in the beginning of the File, in the section `// Dependencies go here`, add the following lines:
 
 ```rust
-use sdl2::video::Window;
-use sdl2::pixels::Color;
-use sdl2::render::Canvas;
-use sdl2::EventPump;
+use ggez::{
+    conf::WindowMode,
+    event::EventsLoop,
+    Context, ContextBuilder,
+};
 ```
 
 In your terminal, go into the folder `/rusty-snake`, and run the command `cargo run`.
