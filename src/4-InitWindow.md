@@ -1,6 +1,6 @@
-# Initializing the Canvas
+# Initializing the Window
 
-Our game needs a canvas, where all the games graphic is rendered. Let's initialize it.
+Our game needs to open a window, where all the games graphics are rendered. Let's initialize it.
 
 ## Functions and variables
 
@@ -19,7 +19,12 @@ fn init(width: f32, height: f32) -> (Context, EventsLoop) {
 }
 ```
 
- `fn` declares the function, `init` is its name. The function takes two parameters, `width` and `height`. Rust is a type safe language, so the types of the parameters need to be explicitly indicated. In this example, the type of both parameters is `f32`, a 32-bit floating-point number. The return types also need to be specifically named. `fn init` returns two values in a bracket, separated by a comma. The types of these values are defined in the `ggez`-crate. We'll ignore the body of the function for now.
+`fn` declares the function, `init` is its name. The function takes two parameters, `width` and
+`height`. Rust is a type safe language, so the types of the parameters need to be explicitly
+indicated. In this example, the type of both parameters is `f32`, a 32-bit floating-point number.
+The return types also need to be specifically named. `fn init` returns two values in a bracket,
+separated by a comma. The types of these values are defined in the `ggez`-crate. We'll ignore the
+body of the function for now.
 
 1. In `main()`, delete the `println!` statement.
 

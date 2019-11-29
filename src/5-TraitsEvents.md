@@ -1,4 +1,4 @@
-# The Game Loop
+# Traits and Event Handlers
 
 When running the program, we shouldn't see anything at this point. If you don't see any error
 messages, the program has compiled successfully.
@@ -25,8 +25,10 @@ impl EventHandler for Game {
 ```
 
 Try compiling the program now. This will initially fail, and the compiler should not just tell you
-why, but also how to fix it. One of the great features of Rust is that compiler errors are often
-very helpful.
+why, but also how to fix it.
+
+One of the great features of Rust is that compiler errors are often very helpful, so take care to
+read the compiler errors. The Rust compiler is here to help you, not make your life harder.
 
 When the trait is imported, the compiler will tell us that we need to implement the `update` and
 `draw` methods. Let's add them to the `impl` block:
