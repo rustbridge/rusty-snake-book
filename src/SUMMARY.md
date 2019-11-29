@@ -7,7 +7,6 @@
 - [Initializing the Graphic Loop](./5-InitLoop.md)
 - [Debugging](./6-debugging.md)
 - [User Input](./7-UserInput.md)
-- [Multithreading!](./8-thread.md)
 - [Animation Frames](./9-frames.md)
 - [Error Handling](./10-ResultType.md)
 - [Solution for Using the Result Type](./11-SolutionUsingResult.md)
