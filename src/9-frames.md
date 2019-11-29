@@ -63,12 +63,12 @@ rectangle is drawn as a filled shape, not as an outline.
 
 Now that all the objects have been created, let's actually draw them:
 
-* First, `graphics::clear` will clear the screen with the given color (in this case, black).
-* The `graphics::draw` call will then actually do the drawing. It takes an additional
-[`DrawParam`] argument, which would allow us to rotate, scale and otherwise transform the
-drawn mesh. Since we just pass `DrawParam::new()`, the rect will be rendered without
-transformations.
-* At the end, `graphics::present` will make what we've drawn so far show up in the Window.
+* First, [`graphics::clear`] will clear the screen with the given color (in this case, black).
+* The [`graphics::draw`] call will then actually do the drawing. It takes an additional
+  [`DrawParam`] argument, which would allow us to rotate, scale and otherwise transform the
+  drawn mesh. Since we just pass `DrawParam::new()`, the rect will be rendered without
+  transformations.
+* At the end, [`graphics::present`] will make what we've drawn so far show up in the Window.
 
 Tasks:
 
@@ -83,3 +83,6 @@ Tasks:
 [`DrawMode::fill()`]: https://docs.rs/ggez/0.5.1/ggez/graphics/enum.DrawMode.html#method.fill
 [`DrawParam`]: https://docs.rs/ggez/0.5.1/ggez/graphics/struct.DrawParam.html
 [`rand` crate]: https://crates.io/crates/rand
+[`graphics::clear`]: https://docs.rs/ggez/0.5.1/ggez/graphics/fn.clear.html
+[`graphics::draw`]: https://docs.rs/ggez/0.5.1/ggez/graphics/fn.draw.html
+[`graphics::present`]: https://docs.rs/ggez/0.5.1/ggez/graphics/fn.present.html
