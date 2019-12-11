@@ -1,6 +1,6 @@
 # Initializing the Canvas
 
-Our game needs a canvas, where all the games graphic is rendered. Let's initialize it.
+Our game needs a canvas on which all the games' graphics will be rendered. Let's initialize it.
 
 ## Functions and variables
 
