@@ -6,7 +6,7 @@ To initialize a new project, run `cargo new`:
 $ cargo new rusty_snake
 ```
 
-Cargo generated a new new folder called `rusty_snake`. `cd` into the directory to check out what cargo generated.
+Cargo generates a new new folder called `rusty_snake`. `cd` into the directory to see what cargo generated.
 
 Open the file `cargo.toml` in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.
 
@@ -27,7 +27,7 @@ edition = "2018"
 
 ```
 
-To use SDL2 in rust, we need to add the sdl2 crate as dependency.
+To use SDL2 in rust, we need to add the sdl2 crate as a dependency.
 
 Add the following line in the [dependencies] section:
 `sdl2 = "0.30.0"`
@@ -69,7 +69,7 @@ fn main() {
 }
 ```
 
-Right in the beginning of the File, in the section `// Dependencies go here`, add the following lines:
+Right in the beginning of the file, in the section `// Dependencies go here`, add the following lines:
 
 ```rust
 use sdl2::video::Window;
