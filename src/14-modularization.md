@@ -2,7 +2,7 @@
 
 ## Creating Modules
 
-Since this project will be bigger then  a couple of lines of code, things will be more organised if we split it up into modules. To do this, make a new folder in inside the `src` folder, and call it `lib`. Inside `lib`, create `mod.rs` and `types.rs`.
+As this project will be bigger than just a couple of lines of code, things will be more organized if we split it up into modules. To do this, make a new folder inside the `src` folder, and call it `lib`. Inside `lib`, create `mod.rs` and `types.rs`.
 
 ```plain
 .
@@ -19,7 +19,7 @@ Since this project will be bigger then  a couple of lines of code, things will b
 └── ...
 ```
 
-Move all functions you wrote to `mod.rs`. In order for this to work, all dependencies, these functions need, also need to be declared in `mod.rs`. If they are not used in `main.rs`, you can delete them there.
+Move all functions you wrote to `mod.rs`. In order for this to work, all dependencies that these functions need, also need to be declared in `mod.rs`. If they are not used in `main.rs`, you can delete them there.
 
 ## Dependencies
 
