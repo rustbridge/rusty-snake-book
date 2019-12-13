@@ -21,7 +21,7 @@ pub fn display_cell(
     let x = cell_width * col;
     let y = cell_width * row;
 
-    //For now, we want random colors, to see what happens.
+    // For now, we want random colors, to see what happens.
     // let cell_color = &grid[row as usize][col as usize];
     // let drawing_color = Color::RGB(cell_color.red, cell_color.green, cell_color.blue);
 
@@ -64,7 +64,7 @@ pub fn display_frame(
 }
 ```
 
-Add both of these functions to your program. Discuss, how the compare to `fn display_rectangle`. Then delete `fn display_rectangle`, as is not needed anymore.
+Add both of these functions to your program. Discuss how they compare to `fn display_rectangle`. Then delete `fn display_rectangle`, as it is not needed anymore.
 
 Substitute the line that calls `fn display_rectangle` with the following line:
 
