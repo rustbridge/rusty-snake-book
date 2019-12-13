@@ -12,7 +12,7 @@ Well, maybe not a snake yet, but a square that moves according to your wishes! I
 
 3. Add `pub mod snake;` right below the existing `pub mod types;`.
 
-4. Write a function that initialises the snake as a `SnakeHead`. `SnakeHead` is a struct, that contains fields for a row, a column and a `Cell` value. The row and column values need to be `i32` instead of `u32`. Why?
+4. Write a function that initializes the snake as a `SnakeHead`. `SnakeHead` is a struct that contains fields for a row, a column and a `Cell` value. The row and column values need to be `i32` instead of `u32`. Why?
 
 ## Defining a tuple
 
@@ -24,9 +24,9 @@ let mut direction = (1, 0);
 
 ## Movement
 
-1. In `snake.rs`, write a function, that takes a mutable reference of the `SnakeHead`. It calculates a new position with `direction` values and the coordinates from `SnakeHead` and then returns a new `SnakeHead` with an updated position.
+1. In `snake.rs`, write a function that takes a mutable reference of the `SnakeHead`. It calculates a new position with `direction` values and the coordinates from `SnakeHead` and then returns a new `SnakeHead` with an updated position.
 
-2. Write a function, that takes ownership of the grid, changes the color of the square, where the current `SnakeHead` is located. The grid is then the return value.
+2. Write a function that takes ownership of the grid and changes the color of the square, where the current `SnakeHead` is located. The grid is then the return value.
 
 ## Adding User Input
 
