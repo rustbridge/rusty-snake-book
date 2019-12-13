@@ -9,7 +9,7 @@ In the very basic version, the snake will be a square block, moving around in a 
 Structs are a datatype, that can contain several fields, the fields do not have to be of the same datatype.
 Using structs, we will define our own data types for the grid and the cells. Both struct definition go into `types.rs`
 
-1. Let's define the `Grid`-struct. It has one field named `grid`. The datatypes are vectors of `Cell`s inside a vector. The items in the inner vector are rows, the items in the outer vector colums.
+1. Let's define the `Grid`-struct. It has one field named `grid`. The datatypes are vectors of `Cell`s inside a vector. The items in the inner vector are rows, the items in the outer vector are columns.
 
    ``` rust
    pub struct Grid {
