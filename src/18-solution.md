@@ -60,6 +60,9 @@ pub struct SnakeHead {
 Content of `'game` in `main.rs`
 
 ```rust
+//outside the loop initialize snake
+let mut snake = snake::snake_init();
+
 for event in events.poll_iter() {
     match event {
         Event::KeyDown {
