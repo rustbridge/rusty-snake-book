@@ -6,7 +6,7 @@ To initialize a new project, run `cargo new`:
 $ cargo new rusty_snake
 ```
 
-Cargo generates a new new folder called `rusty_snake`. `cd` into the directory to see what cargo generated.
+Cargo generates a new folder called `rusty_snake`. `cd` into the directory to see what cargo generated.
 
 Open the file `cargo.toml` in the editor of your choice. This is called a manifest, and it contains all of the metadata that Cargo needs to compile your project.
 
