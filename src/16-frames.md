@@ -72,4 +72,11 @@ Substitute the line that calls `fn display_rectangle` with the following line:
 lib::display_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
 ```
 
+It's also necessary to change the types of your `x` an `y` variables inside `mod.rs`:
+
+```
+    let x = (cell_width * col) as i32;
+    let y = (cell_width * row) as i32;
+```
+
 Run the program! Enjoy!
